@@ -1,4 +1,5 @@
 #(1)把文件夹里面的放到
 ADD_SUBDIRECTORY(Main)
+ADD_SUBDIRECTORY(Framework)
+
 #ADD_SUBDIRECTORY(UnitTest)
-#ADD_SUBDIRECTORY(Framework)
