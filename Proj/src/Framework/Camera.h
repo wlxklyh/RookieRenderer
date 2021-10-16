@@ -10,6 +10,8 @@
 
 using namespace RMath;
 
+FVec3 RandomInUnitDisk();
+
 class Camera {
 public:
     FPoint3D Origin;
@@ -17,8 +19,10 @@ public:
     FVec3 Horizontal;
     FVec3 Vertical;
     FVec3 u, v, w;
+    float LensRadius;
 
-    Camera(FPoint3D lookFrom, FVec3 lookAt, FVec3 vUp, float vfov, float aspect) {
+    Camera(FPoint3D lookFrom, FVec3 lookAt, FVec3 vUp, float vfov, float aspect, float aperture, float focusDist) {
+        LensRadius = aperture / 2;
         float theta = vfov * M_PI / 180;
         float half_height = tan(theta / 2);
         float half_width = aspect * half_height;
@@ -26,14 +30,16 @@ public:
         w = unit_vector(lookFrom - lookAt);
         u = unit_vector(cross(vUp, w));
         v = cross(w, u);
-        LeftBottomCorner = Origin - half_width * u - half_height * v - w;
-        Horizontal = 2 * half_width * u;
-        Vertical = 2 * half_height * v;
-
+        LeftBottomCorner = Origin - half_width * focusDist * u - half_height * focusDist * v - w * focusDist;
+        Horizontal = 2 * half_width * focusDist * u;
+        Vertical = 2 * half_height * focusDist * v;
     }
 
-    Ray GetRay(float u, float v) {
-        return Ray(Origin, LeftBottomCorner + u * Horizontal + v * Vertical - Origin);
+    Ray GetRay(float s, float t) {
+        FVec3 rd = LensRadius * RandomInUnitDisk();
+        FVec3 offset = u * rd.X() + v * rd.Y();
+        //offset = FVec3(0,0,0);
+        return Ray(Origin + offset, LeftBottomCorner + s * Horizontal + t * Vertical - Origin - offset);
     }
 
 };

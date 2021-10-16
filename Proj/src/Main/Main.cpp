@@ -66,7 +66,10 @@ int main() {
     Hitable *world = new HitTableList(list, listSize);
 
     //（4）相机
-    Camera camera(FVec3(-2, 2, 1), FVec3(0, 0, -1), FVec3(0, 1, 0), 90, float(PicW) / float(PicH));
+    FVec3 lookFrom(3, 3, 2), lookAt(0, 0, -1);
+    float distFocus = (lookFrom - lookAt).length();
+    Camera camera(lookFrom, lookAt, FVec3(0, 1, 0),
+                  20, float(PicW) / float(PicH), 2.0, distFocus);
     for (int y = PicH - 1; y >= 0; y--) {
         for (int x = 0; x < PicW; x++) {
 
