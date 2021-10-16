@@ -14,6 +14,51 @@
 using namespace RMath;
 
 
+Hitable *RandomScene() {
+    int num = 500;
+    Hitable **list = new Hitable *[num + 10];
+    list[0] = new Sphere(FVec3(0, -1000, 0), 1000, new Lambertian(FVec3(0.5, 0.5, 0.5)));
+    int i = 1;
+    for (int a = -11; a < 11; a++) {
+        if (i >= num) {
+            break;
+        }
+        for (int b = -11; b < 11; b++) {
+            if (i >= num) {
+                break;
+            }
+            float choose_mat = RandomDouble();
+            FVec3 center(a + 0.9 * RandomDouble(), 0.2, b + 0.9 * RandomDouble());
+            if ((center - FVec3(4, 0.2, 0)).length() > 0.9) {
+                if (choose_mat < 0.8) {  // diffuse
+                    list[i++] = new Sphere(
+                            center, 0.2,
+                            new Lambertian(FVec3(RandomDouble() * RandomDouble(),
+                                                 RandomDouble() * RandomDouble(),
+                                                 RandomDouble() * RandomDouble()))
+                    );
+                } else if (choose_mat < 0.95) { // metal
+                    list[i++] = new Sphere(
+                            center, 0.2,
+                            new Metal(FVec3(0.5 * (1 + RandomDouble()),
+                                            0.5 * (1 + RandomDouble()),
+                                            0.5 * (1 + RandomDouble())),
+                                      0.5 * RandomDouble())
+                    );
+                } else {  // glass
+                    list[i++] = new Sphere(center, 0.2, new Dielectric(1.5));
+                }
+            }
+        }
+    }
+
+    //list[i++] = new Sphere(FVec3(0, 1, 0), 1.0, new Dielectric(1.5));
+    list[i++] = new Sphere(FVec3(-4, 1, 0), 1.0, new Lambertian(FVec3(0.4, 0.2, 0.1)));
+    list[i++] = new Sphere(FVec3(4, 1, 0), 1.0, new Metal(FVec3(0.7, 0.6, 0.5), 0.0));
+
+    return new HitTableList(list, i);
+}
+
 FColorRGB Color(const Ray &ray, Hitable &world, int depth) {
     HitRecord hitRecord;
     if (world.Hit(ray, 0.0001, MAXFLOAT, hitRecord)) {
@@ -42,19 +87,11 @@ int main() {
     //（1）宽高
     int PicW = 200;
     int PicH = 100;
-    int SamplesPerPixel = 100;
+    int SamplesPerPixel = 1;
     // （2）这个是ppm图片格式 后面渲染的结果用这个来显示
     out << "P3\n" << PicW << " " << PicH << "\n255\n";
 
     // (3)场景里面有两个球
-//    const int listSize = 5;
-//    Hitable *list[listSize];
-//    list[0] = new Sphere(FVec3(0, 0, -1), 0.5, new Lambertian(FColorRGB(0.8, 0.3, 0.3)));
-//    list[1] = new Sphere(FVec3(0, -100.5, -1), 100, new Lambertian(FColorRGB(0.8, 0.8, 0.0)));
-//    list[2] = new Sphere(FVec3(1, 0, -1), 0.5, new Metal(FColorRGB(0.8, 0.6, 0.2), 0.3));
-//    list[3] = new Sphere(FVec3(-1, 0, -1), 0.5, new Dielectric( 1.5));
-//    list[4] = new Sphere(FVec3(-1, 0, -1), -0.45, new Dielectric( 1.5));
-
     const int listSize = 5;
     Hitable *list[listSize];
     list[0] = new Sphere(FVec3(0, 0, -1), 0.5, new Lambertian(FColorRGB(0.8, 0.3, 0.3)));
@@ -63,13 +100,13 @@ int main() {
     list[3] = new Sphere(FVec3(-1, 0, -1), 0.5, new Dielectric(1.5));
     list[4] = new Sphere(FVec3(-1, 0, -1), -0.45, new Dielectric(1.5));
 
-    Hitable *world = new HitTableList(list, listSize);
-
+    //Hitable *world = new HitTableList(list, listSize);
+    Hitable *world = RandomScene();
     //（4）相机
-    FVec3 lookFrom(3, 3, 2), lookAt(0, 0, -1);
+    FVec3 lookFrom(0, 2, 0), lookAt(-4, 1, 0);
     float distFocus = (lookFrom - lookAt).length();
     Camera camera(lookFrom, lookAt, FVec3(0, 1, 0),
-                  20, float(PicW) / float(PicH), 2.0, distFocus);
+                  90, float(PicW) / float(PicH), 0.0001, distFocus);
     for (int y = PicH - 1; y >= 0; y--) {
         for (int x = 0; x < PicW; x++) {
 
