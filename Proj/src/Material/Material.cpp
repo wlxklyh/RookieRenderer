@@ -3,6 +3,7 @@
 //
 
 #include "Material.h"
+
 RMath::FVec3 Reflect(const RMath::FVec3 &v, const RMath::FVec3 &n) {
     return v - 2 * dot(v, n) * n;
 }

@@ -39,6 +39,7 @@ public:
         FVec3 rd = LensRadius * RandomInUnitDisk();
         FVec3 offset = u * rd.X() + v * rd.Y();
         //offset = FVec3(0,0,0);
+        //这里很关键 要思考为什么这么偏移就可以模糊 近景和远景都可以模糊
         return Ray(Origin + offset, LeftBottomCorner + s * Horizontal + t * Vertical - Origin - offset);
     }
 
