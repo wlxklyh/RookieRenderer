@@ -56,19 +56,54 @@ namespace RMath {
             return e[0] * e[0] + e[1] * e[1] + e[2] * e[2];
         }
 
-        inline Vec3<T> &operator+=(const Vec3<T> &v2);
+        inline Vec3<T> &operator+=(const Vec3<T> &v){
+            e[0] += v[0];
+            e[1] += v[1];
+            e[2] += v[2];
+            return *this;
+        };
 
-        inline Vec3<T> &operator-=(const Vec3<T> &v2);
+        inline Vec3<T> &operator-=(const Vec3<T> &v){
+            e[0] -= v[0];
+            e[1] -= v[1];
+            e[2] -= v[2];
+            return *this;
+        }
 
-        inline Vec3<T> &operator*=(const Vec3<T> &v2);
+        inline Vec3<T> &operator*=(const Vec3<T> &v){
+            e[0] *= v[0];
+            e[1] *= v[1];
+            e[2] *= v[2];
+            return *this;
+        }
 
-        inline Vec3<T> &operator/=(const Vec3<T> &v2);
+        inline Vec3<T> &operator/=(const Vec3<T> &v){
+            e[0] /= v[0];
+            e[1] /= v[1];
+            e[2] /= v[2];
+            return *this;
+        }
 
-        inline Vec3<T> &operator*=(const T v);
+        inline Vec3<T> &operator*=(const T v){
+            e[0] *= v;
+            e[1] *= v;
+            e[2] *= v;
+            return *this;
+        }
 
-        inline Vec3<T> &operator/=(const T v);
+        inline Vec3<T> &operator/=(const T v){
+            e[0] /= v;
+            e[1] /= v;
+            e[2] /= v;
+            return *this;
+        }
 
-        inline void make_unit_vector();
+        inline void make_unit_vector(){
+            float k = 1.0 / length();
+            e[0] *= k;
+            e[1] *= k;
+            e[2] *= k;
+        }
     };
 
 
