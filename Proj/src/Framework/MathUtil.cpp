@@ -3,7 +3,8 @@
 //
 
 #include "MathUtil.h"
-int MathUtil::HMin(int a, int b )
-{
-    return a < b? a : b;
+namespace RMath {
+    int MathUtil::HMin(int a, int b) {
+        return a < b ? a : b;
+    }
 }

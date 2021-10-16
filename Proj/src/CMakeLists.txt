@@ -1,12 +1,14 @@
 #（1）把文件夹下的cpp文件名字添加到SRC_List 然后组织文件夹结构
+#（1.1）把目录下的文件收集到变量里面
 file(GLOB FRAMEWORK_SOURCE Framework/*.cpp Framework/*.hpp Framework/*.inl Framework/*.h)
 file(GLOB MAIN_SOURCE Main/*.cpp Main/*.hpp Main/*.inl Main/*.h)
+file(GLOB UnitTest_SOURCE UnitTest/*.cpp UnitTest/*.hpp UnitTest/*.inl UnitTest/*.h)
 
+#（1.2）把每个文件夹目录里面的文件列表弄到分组里面
 source_group("Framework" FILES ${FRAMEWORK_SOURCE})
 source_group("Main" FILES ${MAIN_SOURCE})
+source_group("UnitTest" FILES ${UnitTest_SOURCE})
 
-AUX_SOURCE_DIRECTORY(Main SRC_LIST)
-AUX_SOURCE_DIRECTORY(Framework SRC_LIST)
 
 #（2）添加一个可执行的文件
 ADD_EXECUTABLE(${PROJECT_NAME}
@@ -30,3 +32,25 @@ if (MSVC)
 endif (MSVC)
 
 
+#（6）单元测试
+INCLUDE(FetchContent)
+FETCHCONTENT_DECLARE(
+        googletest
+        # Specify the commit you depend on and update it regularly.
+        URL https://github.com/google/googletest/archive/609281088cfefc76f9d0ce82e1ff6c30cc3591e5.zip
+)
+# For Windows: Prevent overriding the parent project's compiler/linker settings
+SET(gtest_force_shared_crt ON CACHE BOOL "" FORCE)
+FETCHCONTENT_MAKEAVAILABLE(googletest)
+
+INCLUDE_DIRECTORIES(Framework)
+INCLUDE_DIRECTORIES(UnitTest)
+# Now simply link against gtest or gtest_main as needed. Eg
+ADD_EXECUTABLE(UnitTest
+        ${FRAMEWORK_SOURCE}
+        ${UnitTest_SOURCE}
+        )
+
+
+TARGET_LINK_LIBRARIES(UnitTest gtest_main)
+ADD_TEST(NAME example_test COMMAND UnitTest)
