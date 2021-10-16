@@ -10,10 +10,20 @@
 using namespace RMath;
 
 
+FVec3 RandomInUnitSphere() {
+    FVec3 p;
+    do {
+        p = 2.0 * FVec3(drand48(), drand48(), drand48()) - FVec3(1, 1, 1);
+    } while (p.squared_length() >= 1.0);
+    return p;
+}
+
 FColorRGB Color(const Ray &ray, HitTable &world) {
     HitRecord hitRecord;
     if (world.Hit(ray, 0.0, MAXFLOAT, hitRecord)) {
-        return 0.5f * hitRecord.normal + 0.5f;
+        //这里这么做来实现diffuse
+        FVec3 target = hitRecord.p + hitRecord.normal + RandomInUnitSphere();
+        return 0.5f * Color(Ray(hitRecord.p, target - hitRecord.p), world);
     } else {
         FVec3 dir = ray.Direction();
         FVec3 unitDir = unit_vector(dir);
@@ -47,8 +57,8 @@ int main() {
 
             FColorRGB color(0, 0, 0);
             for (int samplesIndex = 0; samplesIndex < SamplesPerPixel; ++samplesIndex) {
-                float u = float(x ) / float(PicW);
-                float v = float(y ) / float(PicH);
+                float u = float(x + drand48()) / float(PicW);
+                float v = float(y + drand48()) / float(PicH);
                 Ray ray = camera.GetRay(u, v);
                 FColorRGB col = Color(ray, *world);
                 color += col;
