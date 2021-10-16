@@ -21,9 +21,9 @@
 |Chapter8 Metal|![](Img/Chapter8.png)||
 |Chapter8 Metal Fuzz|![](Img/Chapter8-Fuzz.png)||
 |Chapter9 Dielectrics|![](Img/Chapter9.png)||
-|Chapter10|Chapter10||
-|Chapter11|Chapter11||
-|Chapter12|Chapter12||
+|Chapter10 Positionable camera|![](Img/Chapter10.png)||
+|Chapter11 Defocus Blur|![](Img/Chapter11.png)||
+|Chapter12 RandomScene|![](Img/Chapter12.png)||
 
 
 
