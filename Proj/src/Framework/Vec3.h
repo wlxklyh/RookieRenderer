@@ -13,9 +13,9 @@
 namespace RMath {
     template<class T>
     class Vec3 {
-    public:
+    private:
         T e[3];
-
+    public:
         Vec3() {};
 
         Vec3(T xx, T yy, T zz) {
@@ -45,7 +45,7 @@ namespace RMath {
         inline T &operator[](int i) { return e[i]; }
 
         inline bool operator==(const Vec3<T> &rhs) const {
-            return rhs.e[0] == e[0] && rhs.e[1] == e[1] && rhs.e[2] == e[2];
+            return rhs[0] == e[0] && rhs[1] == e[1] && rhs[2] == e[2];
         }
 
         inline T length() const {
@@ -74,65 +74,65 @@ namespace RMath {
 
     template<class T>
     inline Vec3<T> operator+(const Vec3<T> &v1, const Vec3<T> &v2) {
-        return Vec3<T>(v1.e[0] + v2.e[0], v1.e[1] + v2.e[1], v1.e[2] + v2.e[2]);
+        return Vec3<T>(v1[0] + v2[0], v1[1] + v2[1], v1[2] + v2[2]);
     }
 
     template<class T>
     inline Vec3<T> operator-(const Vec3<T> &v1, const Vec3<T> &v2) {
-        return Vec3<T>(v1.e[0] - v2.e[0], v1.e[1] - v2.e[1], v1.e[2] - v2.e[2]);
+        return Vec3<T>(v1[0] - v2[0], v1[1] - v2[1], v1[2] - v2[2]);
     }
 
     template<class T>
     inline Vec3<T> operator*(const Vec3<T> &v1, const Vec3<T> &v2) {
-        return Vec3<T>(v1.e[0] * v2.e[0], v1.e[1] * v2.e[1], v1.e[2] * v2.e[2]);
+        return Vec3<T>(v1[0] * v2[0], v1[1] * v2[1], v1[2] * v2[2]);
     }
 
     template<class T>
     inline Vec3<T> operator/(const Vec3<T> &v1, const Vec3<T> &v2) {
-        return Vec3<T>(v1.e[0] / v2.e[0], v1.e[1] / v2.e[1], v1.e[2] / v2.e[2]);
+        return Vec3<T>(v1[0] / v2[0], v1[1] / v2[1], v1[2] / v2[2]);
     }
 
     template<class T>
     inline Vec3<T> operator/(const float v, const Vec3<T> &v1) {
-        return Vec3<T>(v / v1.e[0], v / v1.e[1], v / v1.e[2]);
+        return Vec3<T>(v / v1[0], v / v1[1], v / v1[2]);
     }
 
     template<class T>
     inline Vec3<T> operator*(const float v, const Vec3<T> &v1) {
-        return Vec3<T>(v1.e[0] * v, v1.e[1] * v, v1.e[2] * v);
+        return Vec3<T>(v1[0] * v, v1[1] * v, v1[2] * v);
     }
 
     template<class T>
     inline Vec3<T> operator*(const Vec3<T> &v1, const float v) {
-        return Vec3<T>(v1.e[0] * v, v1.e[1] * v, v1.e[2] * v);
+        return Vec3<T>(v1[0] * v, v1[1] * v, v1[2] * v);
     }
 
     template<class T>
     inline Vec3<T> operator/(const Vec3<T> &v1, const float v) {
-        return Vec3<T>(v1.e[0] / v, v1.e[1] / v, v1.e[2] / v);
+        return Vec3<T>(v1[0] / v, v1[1] / v, v1[2] / v);
     }
 
     template<class T>
     inline Vec3<T> operator-(const Vec3<T> &v1, const float v) {
-        return Vec3<T>(v1.e[0] - v, v1.e[1] - v, v1.e[2] - v);
+        return Vec3<T>(v1[0] - v, v1[1] - v, v1[2] - v);
     }
 
     template<class T>
     inline Vec3<T> operator+(const Vec3<T> &v1, const float v) {
-        return Vec3<T>(v1.e[0] + v, v1.e[1] + v, v1.e[2] + v);
+        return Vec3<T>(v1[0] + v, v1[1] + v, v1[2] + v);
     }
 
     template<class T>
     inline float dot(const Vec3<T> &v1, const Vec3<T> &v2) {
-        return v1.e[0] * v2.e[0] + v1.e[1] * v2.e[1] + v1.e[2] * v2.e[2];
+        return v1[0] * v2[0] + v1[1] * v2[1] + v1[2] * v2[2];
     }
 
     template<class T>
     inline Vec3<T> cross(const Vec3<T> &v1, const Vec3<T> &v2) {
         return Vec3<T>(
-                v1.e[1] * v2.e[2] - v1.e[2] * v2.e[1],
-                (-v1.e[0] * v2.e[2] - v1.e[2] * v2.e[0]),
-                v1.e[0] * v2.e[1] - v1.e[1] * v2.e[0]
+                v1[1] * v2[2] - v1[2] * v2[1],
+                (-v1[0] * v2[2] - v1[2] * v2[0]),
+                v1[0] * v2[1] - v1[1] * v2[0]
         );
     }
 

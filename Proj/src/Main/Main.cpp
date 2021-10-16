@@ -1,33 +1,24 @@
 #include <iostream>
 #include <fstream>
 #include "Ray.h"
+#include "Sphere.h"
 #include "Vec3.h"
+#include "HitTable.h"
+#include "HitTableList.h"
 
 using namespace RMath;
 
-float HitSphere(const FPoint3D &center, float radius, const Ray &ray) {
-    FVec3 Origin2Center = ray.Origin() - center;
-    float a = dot(ray.Direction(), ray.Direction());
-    float b = 2.0 * dot(Origin2Center, ray.Direction());
-    float c = dot(Origin2Center, Origin2Center) - radius * radius;
-    float discriminant = b * b - 4 * a * c;
-    if (discriminant < 0) {
-        return -1.0;
-    }
-    //选择t小的那个值 是首先hit到的
-    return (-sqrt(discriminant) - b) / (2.0 * a);
-}
 
-FColorRGB Color(const Ray &ray) {
-    float t = HitSphere(FPoint3D(0, 0, -1), 0.5, ray);
-    if (t > 0) {
-        FVec3 normal = unit_vector(ray.PointAtParameter(t) - FVec3(0, 0, -1));
-        return 0.5f * normal + 0.5f;
+FColorRGB Color(const Ray &ray, HitTable &world) {
+    HitRecord hitRecord;
+    if (world.Hit(ray, 0.0, MAXFLOAT, hitRecord)) {
+        return 0.5f * hitRecord.normal + 0.5f;
+    } else {
+        FVec3 dir = ray.Direction();
+        FVec3 unitDir = unit_vector(dir);
+        float lerpValue = 0.5 * (unitDir.Y() + 1.0);
+        return (1 - lerpValue) * FColorRGB(1.0, 1.0, 1.0) + lerpValue * FColorRGB(0.5, 0.7, 1.0);
     }
-    FVec3 dir = ray.Direction();
-    FVec3 unitDir = unit_vector(dir);
-    float lerpValue = 0.5 * (unitDir.Y() + 1.0);
-    return (1 - lerpValue) * FColorRGB(1.0, 1.0, 1.0) + lerpValue * FColorRGB(0.5, 0.7, 1.0);
 }
 
 
@@ -46,13 +37,19 @@ int main() {
     FVec3 horizontal(4, 0, 0);
     FVec3 vertical(0, 2, 0);
     FPoint3D origin(0, 0, 0);
+
+    HitTable *list[2];
+    list[0] = new Sphere(FVec3(0,0,-1),0.5);
+    list[1] = new Sphere(FVec3(0,-100.5,-1),100);
+    HitTable *world = new HitTableList(list,2);
+
     Ray ray(origin, leftbottomCorner);
     for (int y = PicH - 1; y >= 0; y--) {
         for (int x = 0; x < PicW; x++) {
             float u = float(x) / float(PicW);
             float v = float(y) / float(PicH);
             ray.B = leftbottomCorner + u * horizontal + v * vertical;
-            FColorRGB color = Color(ray);
+            FColorRGB color = Color(ray,*world);
             int ir = int(255.99 * color[0]);
             int ig = int(255.99 * color[1]);
             int ib = int(255.99 * color[2]);
