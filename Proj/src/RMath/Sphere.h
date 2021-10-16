@@ -5,17 +5,17 @@
 #ifndef ROOKIERENDERER_SPHERE_H
 #define ROOKIERENDERER_SPHERE_H
 
-#include "HitTable.h"
-
+#include "Hitable.h"
+#include "Material.h"
 namespace RMath {
-    class Sphere : public HitTable {
+    class Sphere : public Hitable {
     public:
         FPoint3D Center;
         float Radius;
-
+        Material *MatPtr;
         Sphere() {};
 
-        Sphere(FVec3 center, float radius) : Center(center), Radius(radius) {};
+        Sphere(FVec3 center, float radius, Material* matPtr) : Center(center), Radius(radius),MatPtr(matPtr) {};
 
         virtual bool Hit(const Ray &ray, float t_min, float t_max, HitRecord &rec) const;
     };

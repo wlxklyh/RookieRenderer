@@ -3,33 +3,34 @@
 #include "Ray.h"
 #include "Sphere.h"
 #include "Vec3.h"
-#include "HitTable.h"
+#include "Hitable.h"
 #include "HitTableList.h"
 #include "Camera.h"
+#include "Material.h"
+#include "Lambertian.h"
+#include "Metal.h"
 
 using namespace RMath;
 
 
-FVec3 RandomInUnitSphere() {
-    FVec3 p;
-    do {
-        p = 2.0 * FVec3(drand48(), drand48(), drand48()) - FVec3(1, 1, 1);
-    } while (p.squared_length() >= 1.0);
-    return p;
-}
-
-FColorRGB Color(const Ray &ray, HitTable &world) {
+FColorRGB Color(const Ray &ray, Hitable &world, int depth) {
     HitRecord hitRecord;
     if (world.Hit(ray, 0.0001, MAXFLOAT, hitRecord)) {
-        //这里这么做来实现diffuse
-        FVec3 target = hitRecord.p + hitRecord.normal + RandomInUnitSphere();
-        return 0.5f * Color(Ray(hitRecord.p, target - hitRecord.p), world);
+        Ray scattered;
+        FColorRGB attenuation;
+        if (depth < 50 && hitRecord.mat->Scatter(ray, hitRecord, attenuation, scattered)) {
+            FColorRGB retColor = Color(scattered, world, depth + 1);
+            return retColor * attenuation;
+        } else {
+            return FColorRGB(0, 0, 0);
+        }
     } else {
         FVec3 dir = ray.Direction();
         FVec3 unitDir = unit_vector(dir);
         float lerpValue = 0.5 * (unitDir.Y() + 1.0);
         return (1 - lerpValue) * FColorRGB(1.0, 1.0, 1.0) + lerpValue * FColorRGB(0.5, 0.7, 1.0);
     }
+
 }
 
 
@@ -45,10 +46,13 @@ int main() {
     out << "P3\n" << PicW << " " << PicH << "\n255\n";
 
     // (3)场景里面有两个球
-    HitTable *list[2];
-    list[0] = new Sphere(FVec3(0, 0, -1), 0.5);
-    list[1] = new Sphere(FVec3(0, -100.5, -1), 100);
-    HitTable *world = new HitTableList(list, 2);
+    Hitable *list[4];
+    list[0] = new Sphere(FVec3(0, 0, -1), 0.5, new Lambertian(FColorRGB(0.8, 0.3, 0.3)));
+    list[1] = new Sphere(FVec3(0, -100.5, -1), 100, new Lambertian(FColorRGB(0.8, 0.8, 0.0)));
+    list[2] = new Sphere(FVec3(1, 0, -1), 0.5, new Metal(FColorRGB(0.8, 0.6, 0.2)));
+    list[3] = new Sphere(FVec3(-1, 0, -1), 0.5, new Metal(FColorRGB(0.8, 0.8, 0.8)));
+
+    Hitable *world = new HitTableList(list, 4);
 
     //（4）相机
     Camera camera;
@@ -60,7 +64,7 @@ int main() {
                 float u = float(x + drand48()) / float(PicW);
                 float v = float(y + drand48()) / float(PicH);
                 Ray ray = camera.GetRay(u, v);
-                FColorRGB col = Color(ray, *world);
+                FColorRGB col = Color(ray, *world, 0);
                 color += col;
             }
             color = color / SamplesPerPixel;

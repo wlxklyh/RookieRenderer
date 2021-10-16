@@ -10,6 +10,7 @@ namespace RMath {
         is >> v[0] >> v[1] >> v[2];
         return is;
     }
+
     template<class T>
     inline std::ostream &operator<<(std::ostream &os, Vec3<T> &v) {
         os << v[0] << v[1] << v[2];

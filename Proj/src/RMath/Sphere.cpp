@@ -24,6 +24,7 @@ namespace RMath {
                 rec.t = t[i];
                 rec.p = ray.PointAtParameter(t[i]);
                 rec.normal = (rec.p - Center) / Radius;
+                rec.mat = MatPtr;
                 return true;
             }
         }

@@ -1,6 +1,6 @@
 #include "gtest/gtest.h"
-#include "Vec3.h"
-#include "Ray.h"
+#include "../RMath/Vec3.h"
+#include "../RMath/Ray.h"
 
 using namespace RMath;
 TEST(Vec3, Operater) {

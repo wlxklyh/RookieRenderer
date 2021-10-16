@@ -5,7 +5,7 @@
 #ifndef ROOKIERENDERER_COMMON_H
 #define ROOKIERENDERER_COMMON_H
 
-#include "MathUtil.h"
+#include "../RMath/MathUtil.h"
 
 
 class Common {

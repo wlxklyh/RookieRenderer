@@ -5,17 +5,17 @@
 #ifndef ROOKIERENDERER_HITTABLELIST_H
 #define ROOKIERENDERER_HITTABLELIST_H
 
-#include "HitTable.h"
+#include "Hitable.h"
 
 namespace RMath {
-    class HitTableList : public HitTable {
+    class HitTableList : public Hitable {
     public:
         int Size;
-        HitTable **List;
+        Hitable **List;
 
         HitTableList() {};
 
-        HitTableList(HitTable **l, int size) : List(l), Size(size) {};
+        HitTableList(Hitable **l, int size) : List(l), Size(size) {};
 
         virtual bool Hit(const Ray &ray, float t_min, float t_max, HitRecord &rec) const override;
     };
