@@ -20,7 +20,7 @@
 |Chapter7-Diffuse & Gamma|![](Img/Chapter7-diffuse&gamma.png)||
 |Chapter8 Metal|![](Img/Chapter8.png)||
 |Chapter8 Metal Fuzz|![](Img/Chapter8-Fuzz.png)||
-|Chapter9 Dielectrics|Chapter9||
+|Chapter9 Dielectrics|![](Img/Chapter9.png)||
 |Chapter10|Chapter10||
 |Chapter11|Chapter11||
 |Chapter12|Chapter12||
