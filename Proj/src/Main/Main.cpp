@@ -47,18 +47,26 @@ int main() {
     out << "P3\n" << PicW << " " << PicH << "\n255\n";
 
     // (3)场景里面有两个球
+//    const int listSize = 5;
+//    Hitable *list[listSize];
+//    list[0] = new Sphere(FVec3(0, 0, -1), 0.5, new Lambertian(FColorRGB(0.8, 0.3, 0.3)));
+//    list[1] = new Sphere(FVec3(0, -100.5, -1), 100, new Lambertian(FColorRGB(0.8, 0.8, 0.0)));
+//    list[2] = new Sphere(FVec3(1, 0, -1), 0.5, new Metal(FColorRGB(0.8, 0.6, 0.2), 0.3));
+//    list[3] = new Sphere(FVec3(-1, 0, -1), 0.5, new Dielectric( 1.5));
+//    list[4] = new Sphere(FVec3(-1, 0, -1), -0.45, new Dielectric( 1.5));
+
     const int listSize = 5;
     Hitable *list[listSize];
     list[0] = new Sphere(FVec3(0, 0, -1), 0.5, new Lambertian(FColorRGB(0.8, 0.3, 0.3)));
     list[1] = new Sphere(FVec3(0, -100.5, -1), 100, new Lambertian(FColorRGB(0.8, 0.8, 0.0)));
     list[2] = new Sphere(FVec3(1, 0, -1), 0.5, new Metal(FColorRGB(0.8, 0.6, 0.2), 0.3));
-    list[3] = new Sphere(FVec3(-1, 0, -1), 0.5, new Dielectric( 1.5));
-    list[4] = new Sphere(FVec3(-1, 0, -1), -0.45, new Dielectric( 1.5));
+    list[3] = new Sphere(FVec3(-1, 0, -1), 0.5, new Dielectric(1.5));
+    list[4] = new Sphere(FVec3(-1, 0, -1), -0.45, new Dielectric(1.5));
 
     Hitable *world = new HitTableList(list, listSize);
 
     //（4）相机
-    Camera camera;
+    Camera camera(FVec3(-2, 2, 1), FVec3(0, 0, -1), FVec3(0, 1, 0), 90, float(PicW) / float(PicH));
     for (int y = PicH - 1; y >= 0; y--) {
         for (int x = 0; x < PicW; x++) {
 
