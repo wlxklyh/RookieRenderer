@@ -20,7 +20,7 @@ FVec3 RandomInUnitSphere() {
 
 FColorRGB Color(const Ray &ray, HitTable &world) {
     HitRecord hitRecord;
-    if (world.Hit(ray, 0.0, MAXFLOAT, hitRecord)) {
+    if (world.Hit(ray, 0.0001, MAXFLOAT, hitRecord)) {
         //这里这么做来实现diffuse
         FVec3 target = hitRecord.p + hitRecord.normal + RandomInUnitSphere();
         return 0.5f * Color(Ray(hitRecord.p, target - hitRecord.p), world);
@@ -65,7 +65,7 @@ int main() {
             }
             color = color / SamplesPerPixel;
             //gamma矫正
-            color = FColorRGB(sqrt(color.R()),sqrt(color.G()),sqrt(color.B()));
+            color = FColorRGB(sqrt(color.R()), sqrt(color.G()), sqrt(color.B()));
             int ir = int(255.99 * color[0]);
             int ig = int(255.99 * color[1]);
             int ib = int(255.99 * color[2]);
