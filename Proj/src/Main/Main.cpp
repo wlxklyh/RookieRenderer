@@ -64,6 +64,8 @@ int main() {
                 color += col;
             }
             color = color / SamplesPerPixel;
+            //gamma矫正
+            color = FColorRGB(sqrt(color.R()),sqrt(color.G()),sqrt(color.B()));
             int ir = int(255.99 * color[0]);
             int ig = int(255.99 * color[1]);
             int ib = int(255.99 * color[2]);
