@@ -1,14 +1,27 @@
-# RookieRender
+# RookieRenderer 
+
+<!-- TOC -->
+
+- [RookieRenderer](#rookierenderer)
+    - [1. Ray Tracing Practice Proj](#1-ray-tracing-practice-proj)
+        - [Build](#build)
+        - [Step Pic](#step-pic)
+
+<!-- /TOC -->
+## 1. Ray Tracing Practice Proj
+![macOS](https://github.com/wlxklyh/RookieRenderer/actions/workflows/macos-ci.yml/badge.svg)
 
 ![](Img/Chapter12Final.png)
-## Building
+This project is a practice program for [Ray Tracing in One Weekend](https://raytracing.github.io/books/RayTracingInOneWeekend.html). Petershirley YYDS.
+### Build
 
-- Use Clion to open proj dir on Windows platform or Mac platform
-- Run generate_sln.bat on Windows platform
+- You can use Clion to open proj dir on windows platform or mac platform
+- Also you can use cmake and cmake build the proj.
+- Also, you can use vs on windows platform.Run generate_sln.bat to generate vs solution.
 
-## Step Pic
+### Step Pic
 
-||Pic|Descript|
+|Chapter|Pic|Descript|
 |-|-|-|
 |Chapter1 Output an image|![Chapter1](Img/Chapter1.png)||
 |Chapter2 The vec3 class|![Chapter2](Img/Chapter1.png)||
