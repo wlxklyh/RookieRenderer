@@ -1,10 +1,9 @@
 name: macOS
-on:
-  push:
+on: push
 jobs:
   build:
     runs-on: macos-latest
     steps:
     - name: Build
-      run: Proj/build_macos.sh
+      run: ./build_macos.sh
       
