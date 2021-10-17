@@ -4,6 +4,8 @@ jobs:
   build:
     runs-on: macos-latest
     steps:
+    - name: Checkout
+      uses: actions/checkout@master
     - name: Build
       run: ./build_macos.sh
       
