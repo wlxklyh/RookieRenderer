@@ -1,5 +1,6 @@
 # RookieRender
 
+![](Img/Chapter12Final.png)
 ## Building
 
 - Use Clion to open proj dir on Windows platform or Mac platform
@@ -24,6 +25,7 @@
 |Chapter10 Positionable camera|![](Img/Chapter10.png)||
 |Chapter11 Defocus Blur|![](Img/Chapter11.png)||
 |Chapter12 RandomScene|![](Img/Chapter12.png)||
+|Chapter12 RandomScene|![](Img/Chapter12Final.png)||
 
 
 
