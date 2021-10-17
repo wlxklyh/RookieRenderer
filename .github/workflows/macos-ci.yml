@@ -6,6 +6,8 @@ jobs:
     steps:
     - name: Checkout
       uses: actions/checkout@master
+    - name: GotoProjDir
+      run: cd Proj
     - name: Build
-      run: /Proj/build_macos.sh
+      run: ./build_macos.sh
       
