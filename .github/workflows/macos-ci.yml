@@ -7,5 +7,7 @@ jobs:
     - name: Checkout
       uses: actions/checkout@master
     - name: Build
-      run: /Proj/build_macos.sh
+      run: 
+        cd Proj
+        ./build_macos.sh
       
