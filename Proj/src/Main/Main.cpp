@@ -11,6 +11,8 @@
 #include "Metal.h"
 #include "Dielectric.h"
 
+
+
 using namespace RMath;
 
 
@@ -86,9 +88,9 @@ int main() {
     out.open("OutputPic.ppm");
 
     //（1）宽高
-    int PicW = 200 * 2;
-    int PicH = 100 * 2;
-    int SamplesPerPixel = 200;
+    int PicW = 200;
+    int PicH = 100;
+    int SamplesPerPixel = 1;
     // （2）这个是ppm图片格式 后面渲染的结果用这个来显示
     out << "P3\n" << PicW << " " << PicH << "\n255\n";
 
@@ -128,11 +130,12 @@ int main() {
             out << ir << " " << ig << " " << ib << "\n";
         }
     }
-    std::cout << float(clock() - nowTime) / (float) CLOCKS_PER_SEC;
+    std::cout << float(clock() - nowTime) / (float) CLOCKS_PER_SEC << " seconds";
     out.close();
 
     // 打开结果图片
 #ifdef _WIN32
+    system(" start .\\OutputPic.ppm");
     //define something for Windows (32-bit and 64-bit, this part is common)
 #ifdef _WIN64
       //define something for Windows (64-bit only)

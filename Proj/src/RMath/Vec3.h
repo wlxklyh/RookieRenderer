@@ -8,7 +8,7 @@
 #include <math.h>
 #include <stdlib.h>
 #include <iostream>
-
+#include "PlatWindows.h"
 
 namespace RMath {
     template<class T>
