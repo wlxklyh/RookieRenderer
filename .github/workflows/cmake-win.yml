@@ -9,4 +9,4 @@ jobs:
     - name: Build
       run: 
         cd Proj
-        ./build_windows.sh
+        ./build_windows.bat
