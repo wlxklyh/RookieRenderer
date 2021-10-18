@@ -7,6 +7,6 @@ jobs:
     - name: Checkout
       uses: actions/checkout@master
     - name: Build
-      run: 
-        cd Proj
+      run: |
+        cd Proj | 
         ./build_windows.bat
