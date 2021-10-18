@@ -9,7 +9,7 @@
 
 <!-- /TOC -->
 ## 1. Ray Tracing Practice Proj
-![macOS](https://github.com/wlxklyh/RookieRenderer/actions/workflows/macos-ci.yml/badge.svg)
+![windows](https://github.com/wlxklyh/RookieRenderer/actions/workflows/cmake-win.yml/badge.svg) ![macOS](https://github.com/wlxklyh/RookieRenderer/actions/workflows/macos-ci.yml/badge.svg)
 
 ![](Img/Chapter12Final.png)
 This project is a practice program for [Ray Tracing in One Weekend](https://raytracing.github.io/books/RayTracingInOneWeekend.html). Petershirley YYDS.
