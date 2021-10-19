@@ -1,7 +1,7 @@
 //
 // Created by linyanhou on 2021/10/18.
 //
-
+#ifdef _WIN32
 #include "PlatWindows.h"
 double drand48(void)
 {
@@ -15,3 +15,4 @@ void srand48(unsigned int i)
 {
     seed  = (((long long int)i) << 16) | rand();
 }
+#endif
