@@ -55,8 +55,13 @@ Hitable *RandomScene() {
     }
 
     //list[i++] = new Sphere(FVec3(0, 1, 0), 1.0, new Dielectric(1.5));
-    list[i++] = new Sphere(FVec3(-4, 1, 0), 1.0, new Lambertian(FVec3(0.4, 0.2, 0.1)));
-    list[i++] = new Sphere(FVec3(4, 1, 0), 1.0, new Metal(FVec3(0.7, 0.6, 0.5), 0.0));
+//    list[i++] = new Sphere(FVec3(-4, 1, 0), 1.0, new Lambertian(FVec3(0.4, 0.2, 0.1)));
+//    list[i++] = new Sphere(FVec3(4, 1, 0), 1.0, new Metal(FVec3(0.7, 0.6, 0.5), 0.0));
+
+    list[i++] = new Sphere(FVec3(-4, 1, 5), 1.0, new Dielectric(1.5));
+    list[i++] = new Sphere(FVec3(0, 1, 5), 1.0, new Lambertian(FVec3(237.0/255.0, 107.0/255.0, 126.0/255.0)));
+    list[i++] = new Sphere(FVec3(4, 1, 5), 1.0, new Metal(FVec3(0.7, 0.6, 0.5), 0.0));
+
 
     return new HitTableList(list, i);
 }
@@ -88,9 +93,9 @@ int main() {
     out.open("OutputPic.ppm");
 
     //（1）宽高
-    int PicW = 200;
-    int PicH = 100;
-    int SamplesPerPixel = 1;
+    int PicW = 2000;
+    int PicH = 1000;
+    int SamplesPerPixel = 200;
     // （2）这个是ppm图片格式 后面渲染的结果用这个来显示
     out << "P3\n" << PicW << " " << PicH << "\n255\n";
 
@@ -106,7 +111,7 @@ int main() {
     //Hitable *world = new HitTableList(list, listSize);
     Hitable *world = RandomScene();
     //（4）相机
-    FVec3 lookFrom(0, 2, 0), lookAt(-4, 1, 0);
+    FVec3 lookFrom(0, 1.5, 8.5), lookAt(0, 1, 5);
     float distFocus = (lookFrom - lookAt).length();
     Camera camera(lookFrom, lookAt, FVec3(0, 1, 0),
                   90, float(PicW) / float(PicH), 0.0001, distFocus);
