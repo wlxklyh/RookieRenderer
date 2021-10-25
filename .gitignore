@@ -158,6 +158,7 @@ packages/*
 !packages/build/
 .idea
 cmake-build-debug
+cmake-build-release
 # Windows Azure Build Output
 csx/
 *.build.csdef

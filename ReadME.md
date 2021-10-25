@@ -3,15 +3,15 @@
 <!-- TOC -->
 
 - [RookieRenderer](#rookierenderer)
-    - [1. Ray Tracing Practice Proj](#1-ray-tracing-practice-proj)
-        - [Build](#build)
-        - [Step Pic](#step-pic)
+  - [1. Ray Tracing Practice Proj](#1-ray-tracing-practice-proj)
+    - [Build](#build)
+    - [Step Pic](#step-pic)
 
 <!-- /TOC -->
 ## 1. Ray Tracing Practice Proj
 ![windows](https://github.com/wlxklyh/RookieRenderer/actions/workflows/cmake-win.yml/badge.svg) ![macOS](https://github.com/wlxklyh/RookieRenderer/actions/workflows/macos-ci.yml/badge.svg)
 
-![](Img/Chapter12Final.png)
+![](Img/OutputPic.jpg)
 This project is a practice program for [Ray Tracing in One Weekend](https://raytracing.github.io/books/RayTracingInOneWeekend.html). Petershirley YYDS.
 ### Build
 
@@ -20,6 +20,10 @@ This project is a practice program for [Ray Tracing in One Weekend](https://rayt
 - Also, you can use vs on windows platform.Run generate_sln.bat to generate vs solution.
 
 ### Step Pic
+
+You can checkout the version you want:
+
+![](Img/commitlog.png)
 
 |Chapter|Pic|Descript|
 |-|-|-|
@@ -38,7 +42,7 @@ This project is a practice program for [Ray Tracing in One Weekend](https://rayt
 |Chapter10 Positionable camera|![](Img/Chapter10.png)||
 |Chapter11 Defocus Blur|![](Img/Chapter11.png)||
 |Chapter12 RandomScene|![](Img/Chapter12.png)||
-|Chapter12 RandomScene|![](Img/Chapter12Final.png)||
+|Chapter12 RandomScene|![](Img/OutputPic.jpg)||
 
 
 
