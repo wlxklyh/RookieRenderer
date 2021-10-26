@@ -17,10 +17,10 @@ source_group("Material" FILES ${MATERIAL_SOURCE})
 source_group("Platform" FILES ${PLATFORM_SOURCE})
 
 
-ADD_COMPILE_DEFINITIONS(_USE_MATH_DEFINES)
+add_compile_definitions(_USE_MATH_DEFINES)
 
 #（2）添加一个可执行的文件
-ADD_EXECUTABLE(${PROJECT_NAME}
+add_executable(${PROJECT_NAME}
         ${FRAMEWORK_SOURCE}
         ${RMATH_SOURCE}
         ${MATERIAL_SOURCE}
@@ -28,14 +28,14 @@ ADD_EXECUTABLE(${PROJECT_NAME}
         ${MAIN_SOURCE})
 
 #（3）设置可执行的文件 放在哪个目录
-SET(EXECUTABLE_OUTPUT_PATH ${PROJECT_BINARY_DIR}/bin)
+set(EXECUTABLE_OUTPUT_PATH ${PROJECT_BINARY_DIR}/bin)
 
 #（4）添加include 目录 这样cpp里面可以直接include这些目录的文件
-INCLUDE_DIRECTORIES(Material)
-INCLUDE_DIRECTORIES(Framework)
-INCLUDE_DIRECTORIES(Main)
-INCLUDE_DIRECTORIES(RMath)
-INCLUDE_DIRECTORIES(Platform)
+include_directories(Material)
+include_directories(Framework)
+include_directories(Main)
+include_directories(RMath)
+include_directories(Platform)
 
 
 #（5）如果是VS则设置启动项目
@@ -48,29 +48,30 @@ endif (MSVC)
 
 
 #（6）单元测试
-INCLUDE(FetchContent)
-FETCHCONTENT_DECLARE(
+include(FetchContent)
+fetchcontent_declare(
         googletest
         # Specify the commit you depend on and update it regularly.
         URL https://github.com/google/googletest/archive/609281088cfefc76f9d0ce82e1ff6c30cc3591e5.zip
 )
 # For Windows: Prevent overriding the parent project's compiler/linker settings
-SET(gtest_force_shared_crt ON CACHE BOOL "" FORCE)
-FETCHCONTENT_MAKEAVAILABLE(googletest)
+set(gtest_force_shared_crt ON CACHE BOOL "" FORCE)
+fetchcontent_makeavailable(googletest)
 
 
-INCLUDE_DIRECTORIES(Material)
-INCLUDE_DIRECTORIES(RMath)
-INCLUDE_DIRECTORIES(Framework)
-INCLUDE_DIRECTORIES(UnitTest)
-INCLUDE_DIRECTORIES(Platform)
+include_directories(Material)
+include_directories(RMath)
+include_directories(Framework)
+include_directories(UnitTest)
+include_directories(Platform)
+
+
 # Now simply link against gtest or gtest_main as needed. Eg
-ADD_EXECUTABLE(UnitTest
+add_executable(UnitTest
         ${UNITTEST_SOURCE}
         ${FRAMEWORK_SOURCE}
         ${RMath_SOURCE}
         ${PLATFORM_SOURCE})
 
-
-TARGET_LINK_LIBRARIES(UnitTest gtest_main)
-ADD_TEST(NAME example_test COMMAND UnitTest)
+target_link_libraries(UnitTest gtest_main)
+add_test(NAME example_test COMMAND UnitTest)
