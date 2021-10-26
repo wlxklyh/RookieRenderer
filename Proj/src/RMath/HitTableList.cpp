@@ -18,4 +18,8 @@ namespace RMath {
         }
         return hitAnything;
     }
+
+    bool HitTableList::BoundindBox(float t0, float t1, AABB &box) const {
+        return false;
+    }
 }

@@ -3,7 +3,6 @@
 file(GLOB FRAMEWORK_SOURCE Framework/*.cpp Framework/*.hpp Framework/*.inl Framework/*.h)
 file(GLOB RMATH_SOURCE RMath/*.cpp RMath/*.hpp RMath/*.inl RMath/*.h)
 file(GLOB MAIN_SOURCE Main/*.cpp Main/*.hpp Main/*.inl Main/*.h)
-file(GLOB unittest_source UnitTest/*.cpp UnitTest/*.hpp UnitTest/*.inl UnitTest/*.h)
 file(GLOB MATERIAL_SOURCE Material/*.cpp Material/*.hpp Material/*.inl Material/*.h)
 file(GLOB PLATFORM_SOURCE Platform/*.cpp Platform/*.hpp Platform/*.inl Platform/*.h)
 
@@ -12,7 +11,6 @@ file(GLOB PLATFORM_SOURCE Platform/*.cpp Platform/*.hpp Platform/*.inl Platform/
 source_group("Framework" FILES ${FRAMEWORK_SOURCE})
 source_group("RMath" FILES ${RMATH_SOURCE})
 source_group("Main" FILES ${MAIN_SOURCE})
-source_group("UnitTest" FILES ${UNITTEST_SOURCE})
 source_group("Material" FILES ${MATERIAL_SOURCE})
 source_group("Platform" FILES ${PLATFORM_SOURCE})
 
@@ -25,7 +23,8 @@ add_executable(${PROJECT_NAME}
         ${RMATH_SOURCE}
         ${MATERIAL_SOURCE}
         ${PLATFORM_SOURCE}
-        ${MAIN_SOURCE})
+        ${MAIN_SOURCE}
+        )
 
 #（3）设置可执行的文件 放在哪个目录
 set(EXECUTABLE_OUTPUT_PATH ${PROJECT_BINARY_DIR}/bin)
@@ -36,6 +35,7 @@ include_directories(Framework)
 include_directories(Main)
 include_directories(RMath)
 include_directories(Platform)
+include_directories(${gtest_SOURCE_DIR}/include ${gtest_SOURCE_DIR})
 
 
 #（5）如果是VS则设置启动项目
@@ -59,19 +59,17 @@ set(gtest_force_shared_crt ON CACHE BOOL "" FORCE)
 fetchcontent_makeavailable(googletest)
 
 
-include_directories(Material)
-include_directories(RMath)
-include_directories(Framework)
-include_directories(UnitTest)
-include_directories(Platform)
-
 
 # Now simply link against gtest or gtest_main as needed. Eg
 add_executable(UnitTest
-        ${UNITTEST_SOURCE}
         ${FRAMEWORK_SOURCE}
-        ${RMath_SOURCE}
-        ${PLATFORM_SOURCE})
-
+        ${RMATH_SOURCE}
+        ${MATERIAL_SOURCE}
+        ${PLATFORM_SOURCE}
+        )
+target_link_libraries(${PROJECT_NAME} gtest_main)
 target_link_libraries(UnitTest gtest_main)
 add_test(NAME example_test COMMAND UnitTest)
+
+include(GoogleTest)
+gtest_discover_tests(UnitTest)

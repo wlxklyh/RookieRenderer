@@ -31,4 +31,10 @@ namespace RMath {
         return false;
     }
 
+    bool Sphere::BoundindBox(float t0, float t1, AABB &box) const {
+        box.MinV =  Center - FVec3(Radius,Radius,Radius);
+        box.MaxV =  Center + FVec3(Radius,Radius,Radius);
+        return false;
+    }
+
 }

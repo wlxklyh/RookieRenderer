@@ -3,12 +3,14 @@
 <!-- TOC -->
 
 - [RookieRenderer](#rookierenderer)
-  - [1. Ray Tracing Practice Proj](#1-ray-tracing-practice-proj)
-    - [Build](#build)
-    - [Step Pic](#step-pic)
+    - [1. Ray Tracing in a weekend Practice Proj](#1-ray-tracing-in-a-weekend-practice-proj)
+        - [Build](#build)
+        - [Step Pic](#step-pic)
+    - [2. Ray Tracing The Next Week Practice Proj](#2-ray-tracing-the-next-week-practice-proj)
+        - [Step Pic](#step-pic-1)
 
 <!-- /TOC -->
-## 1. Ray Tracing Practice Proj
+## 1. Ray Tracing in a weekend Practice Proj
 ![windows](https://github.com/wlxklyh/RookieRenderer/actions/workflows/cmake-win.yml/badge.svg) ![macOS](https://github.com/wlxklyh/RookieRenderer/actions/workflows/macos-ci.yml/badge.svg)
 
 ![](Img/OutputPic.jpg)
@@ -45,6 +47,12 @@ You can checkout the version you want:
 |Chapter12 RandomScene|![](Img/OutputPic.jpg)||
 
 
+## 2. Ray Tracing The Next Week Practice Proj
 
 
+### Step Pic
 
+|Chapter|Pic|Descript|
+|-|-|-|
+|Chapter1 Motion Blur|||
+|Chapter2 BVH|||

@@ -6,7 +6,7 @@
 #define ROOKIERENDERER_RAY_H
 
 #include "Vec3.h"
-
+#include "gtest/gtest.h"
 namespace RMath {
     class Ray {
     public:
@@ -26,6 +26,8 @@ namespace RMath {
 
         FVec3 PointAtParameter(float t) const { return A + B * t; }
     };
+
+
 
 }
 

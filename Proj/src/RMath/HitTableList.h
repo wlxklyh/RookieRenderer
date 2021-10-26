@@ -18,6 +18,8 @@ namespace RMath {
         HitTableList(Hitable **l, int size) : List(l), Size(size) {};
 
         virtual bool Hit(const Ray &ray, float t_min, float t_max, HitRecord &rec) const override;
+
+        virtual bool BoundindBox(float t0, float t1, AABB& box) const override;
     };
 }
 

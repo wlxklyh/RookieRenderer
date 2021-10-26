@@ -5,10 +5,21 @@
 #ifndef ROOKIERENDERER_MATHUTIL_H
 #define ROOKIERENDERER_MATHUTIL_H
 
+#include "Macro.h"
+
 namespace RMath {
-    class MathUtil {
-    public:
-        static int HMin(int a, int b);
-    };
+#define FLOAT_SMALL 0.0000000001
+
+    template<class T>
+    FORCEINLINE T Min(T value1, T value2) {
+        return value1 < value2?value1:value2;
+    }
+
+    template<class T>
+    FORCEINLINE T Max(T value1, T value2) {
+        return value1 > value2?value1:value2;
+    }
+
+
 }
 #endif //ROOKIERENDERER_MATHUTIL_H

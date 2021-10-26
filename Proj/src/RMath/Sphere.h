@@ -20,6 +20,8 @@ namespace RMath {
         Sphere(FVec3 center, float radius, Material *matPtr) : Center(center), Radius(radius), MatPtr(matPtr) {};
 
         virtual bool Hit(const Ray &ray, float t_min, float t_max, HitRecord &rec) const;
+
+        virtual bool BoundindBox(float t0, float t1, AABB& box) const override;
     };
 }
 
