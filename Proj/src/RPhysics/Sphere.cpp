@@ -5,9 +5,9 @@
 #include "Sphere.h"
 
 
-namespace RMath {
-    bool Sphere::Hit(const Ray &ray, float t_min, float t_max, HitRecord &rec) const {
-        FVec3 Origin2Center = ray.Origin() - Center;
+namespace RPhysics {
+    bool Sphere::Hit(const RMath::Ray &ray, float t_min, float t_max, HitRecord &rec) const {
+        RMath::FVec3 Origin2Center = ray.Origin() - Center;
         float a = dot(ray.Direction(), ray.Direction());
         float b = 2.0 * dot(Origin2Center, ray.Direction());
         float c = dot(Origin2Center, Origin2Center) - Radius * Radius;
@@ -32,8 +32,8 @@ namespace RMath {
     }
 
     bool Sphere::BoundindBox(float t0, float t1, AABB &box) const {
-        box.MinV =  Center - FVec3(Radius,Radius,Radius);
-        box.MaxV =  Center + FVec3(Radius,Radius,Radius);
+        box.MinV = Center - RMath::FVec3(Radius, Radius, Radius);
+        box.MaxV = Center + RMath::FVec3(Radius, Radius, Radius);
         return false;
     }
 

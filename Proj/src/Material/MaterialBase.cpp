@@ -2,7 +2,7 @@
 // Created by wlxklyh on 2021/10/16.
 //
 
-#include "Material.h"
+#include "MaterialBase.h"
 
 RMath::FVec3 Reflect(const RMath::FVec3 &v, const RMath::FVec3 &n) {
     return v - 2 * dot(v, n) * n;

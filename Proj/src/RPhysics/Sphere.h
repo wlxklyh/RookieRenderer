@@ -8,18 +8,18 @@
 #include "Hitable.h"
 #include "Material.h"
 
-namespace RMath {
+namespace RPhysics {
     class Sphere : public Hitable {
     public:
-        FPoint3D Center;
+        RMath::FPoint3D Center;
         float Radius;
-        Material *MatPtr;
+        MaterialBase *MatPtr;
 
         Sphere() {};
 
-        Sphere(FVec3 center, float radius, Material *matPtr) : Center(center), Radius(radius), MatPtr(matPtr) {};
+        Sphere(RMath::FVec3 center, float radius, MaterialBase *matPtr) : Center(center), Radius(radius), MatPtr(matPtr) {};
 
-        virtual bool Hit(const Ray &ray, float t_min, float t_max, HitRecord &rec) const;
+        virtual bool Hit(const RMath::Ray &ray, float t_min, float t_max, HitRecord &rec) const override;
 
         virtual bool BoundindBox(float t0, float t1, AABB& box) const override;
     };

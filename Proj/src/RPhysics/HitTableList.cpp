@@ -4,8 +4,8 @@
 
 #include "HitTableList.h"
 
-namespace RMath {
-    bool HitTableList::Hit(const Ray &ray, float t_min, float t_max, HitRecord &rec) const {
+namespace RPhysics {
+    bool HitTableList::Hit(const RMath::Ray &ray, float t_min, float t_max, HitRecord &rec) const {
         bool hitAnything = false;
         HitRecord recTmp;
         double closestTime = t_max;

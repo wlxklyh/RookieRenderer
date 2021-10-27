@@ -1,20 +1,14 @@
 #include <iostream>
 #include <fstream>
-#include "Ray.h"
-#include "Sphere.h"
-#include "Vec3.h"
-#include "Hitable.h"
-#include "HitTableList.h"
-#include "Camera.h"
+
+#include "RMath.h"
+#include "RPhysics.h"
+#include "Framework.h"
 #include "Material.h"
-#include "Lambertian.h"
-#include "Metal.h"
-#include "Dielectric.h"
-
-
+#include "Camera.h"
 
 using namespace RMath;
-
+using namespace RPhysics;
 
 Hitable *RandomScene() {
     int num = 500;
@@ -59,7 +53,7 @@ Hitable *RandomScene() {
 //    list[i++] = new Sphere(FVec3(4, 1, 0), 1.0, new Metal(FVec3(0.7, 0.6, 0.5), 0.0));
 
     list[i++] = new Sphere(FVec3(-4, 1, 5), 1.0, new Dielectric(1.5));
-    list[i++] = new Sphere(FVec3(0, 1, 5), 1.0, new Lambertian(FVec3(237.0/255.0, 107.0/255.0, 126.0/255.0)));
+    list[i++] = new Sphere(FVec3(0, 1, 5), 1.0, new Lambertian(FVec3(237.0 / 255.0, 107.0 / 255.0, 126.0 / 255.0)));
     list[i++] = new Sphere(FVec3(4, 1, 5), 1.0, new Metal(FVec3(0.7, 0.6, 0.5), 0.0));
 
 

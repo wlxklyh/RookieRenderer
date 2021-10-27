@@ -20,7 +20,7 @@ TEST(Vec3, Operater) {
 
 
 TEST(Vec3, TestDoSomething) {
-    EXPECT_EQ(1,1);
+    EXPECT_EQ(1, 1);
 }
 
 

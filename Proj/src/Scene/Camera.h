@@ -5,8 +5,7 @@
 #ifndef ROOKIERENDERER_CAMERA_H
 #define ROOKIERENDERER_CAMERA_H
 
-#include "../RMath/Vec3.h"
-#include "../RMath/Ray.h"
+#include "RMath.h"
 
 using namespace RMath;
 

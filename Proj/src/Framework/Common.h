@@ -5,12 +5,9 @@
 #ifndef ROOKIERENDERER_COMMON_H
 #define ROOKIERENDERER_COMMON_H
 
-#include "../RMath/MathUtil.h"
-
-
 class Common {
 public:
-    static RMath::MathUtil mathUtil;
+
 };
 
 #endif //ROOKIERENDERER_COMMON_H
