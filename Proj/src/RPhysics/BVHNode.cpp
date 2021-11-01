@@ -73,8 +73,8 @@ namespace RPhysics {
     }
 
     bool BVHNode::BoundindBox(float t0, float t1, AABB &box) const {
-        box.MaxV = BoundingAABB->MaxV;
-        box.MinV = BoundingAABB->MinV;
+        box.MaxV = BoundingAABB.MaxV;
+        box.MinV = BoundingAABB.MinV;
         return true;
     }
 
