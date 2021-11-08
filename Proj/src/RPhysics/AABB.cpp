@@ -5,7 +5,7 @@
 #include "AABB.h"
 
 namespace RPhysics{
-    bool AABB::Hit(const RMath::Ray &ray, float &tMin, float &tMax) const{
+    bool AABB::Hit(const RMath::Ray &ray, float tMin, float tMax) const{
         for (int i = 0; i < 3; i++) {
             //避免除以0
             if (abs(ray.B[i]) < FLOAT_SMALL) {

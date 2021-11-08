@@ -6,6 +6,7 @@
 #define ROOKIERENDERER_RPHYSICS_H
 
 #include "AABB.h"
+#include "BVHNode.h"
 #include "Hitable.h"
 #include "HitTableList.h"
 #include "Sphere.h"

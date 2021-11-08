@@ -34,7 +34,7 @@ namespace RPhysics {
     bool Sphere::BoundindBox(float t0, float t1, AABB &box) const {
         box.MinV = Center - RMath::FVec3(Radius, Radius, Radius);
         box.MaxV = Center + RMath::FVec3(Radius, Radius, Radius);
-        return false;
+        return true;
     }
 
 }

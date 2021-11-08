@@ -21,7 +21,7 @@ namespace RPhysics {
             MinV = min;
         }
 
-        bool Hit(const RMath::Ray &ray, float &tMin, float &tMax) const;
+        bool Hit(const RMath::Ray &ray, float tMin, float tMax) const;
     };
 
     AABB MergeTwoBox(AABB &box1, AABB &box2);
