@@ -88,14 +88,15 @@ int main() {
     std::ofstream out;
     out.open("OutputPic.ppm");
 
+
     //（1）宽高
     int PicW = 200;
     int PicH = 100;
     int SamplesPerPixel = 1;
 
-//    PicW = 2000;
-//    PicH = 1000;
-//    SamplesPerPixel = 100;
+    PicW = 2000;
+    PicH = 1000;
+    SamplesPerPixel = 100;
 
     // （2）这个是ppm图片格式 后面渲染的结果用这个来显示
     out << "P3\n" << PicW << " " << PicH << "\n255\n";
@@ -136,7 +137,11 @@ int main() {
             out << ir << " " << ig << " " << ib << "\n";
         }
     }
-    std::cout << float(clock() - nowTime) / (float) CLOCKS_PER_SEC << " seconds";
+    std::ofstream outTime;
+    outTime.open("OutputTime.txt");
+
+    outTime << "Width:" << PicW << " Height:" << PicH << " Samples:" << SamplesPerPixel << "\n";
+    outTime << float(clock() - nowTime) / (float) CLOCKS_PER_SEC << " seconds\n";
     out.close();
 
     // 打开结果图片
