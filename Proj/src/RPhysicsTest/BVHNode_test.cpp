@@ -6,7 +6,7 @@ using namespace RPhysics;
 
 TEST(BVH, TestSphereBoundindBox) {
     Hitable *list[1];
-    list[0] = new Sphere(FVec3(0.1, 0.2, 0.3), 0.5, new Lambertian(FColorRGB(0.8, 0.3, 0.3)));
+    list[0] = new Sphere(FVec3(0.1, 0.2, 0.3), 0.5, nullptr);
     BVHNode *node = new BVHNode(list, 1, 0, 0);
 
     AABB aabb;
@@ -24,8 +24,8 @@ TEST(BVH, TestSphereBoundindBox) {
 
 TEST(BVH, TestSphereBoundindBox2) {
     Hitable *list[2];
-    list[0] = new Sphere(FVec3(0.1, 0.2, 0.3), 0.5, new Lambertian(FColorRGB(0.8, 0.3, 0.3)));
-    list[1] = new Sphere(FVec3(0.6, 0.7, 0.8), 0.5, new Lambertian(FColorRGB(0.8, 0.3, 0.3)));
+    list[0] = new Sphere(FVec3(0.1, 0.2, 0.3), 0.5, nullptr);
+    list[1] = new Sphere(FVec3(0.6, 0.7, 0.8), 0.5, nullptr);
     BVHNode *node = new BVHNode(list, 2, 0, 0);
 
     AABB aabb;
@@ -45,7 +45,7 @@ TEST(BVH, TestSphereBoundindBox10) {
     static const int sphereNum = 10;
     Hitable *list[sphereNum];
     for (int i = 0; i < sphereNum; i++) {
-        list[i] = new Sphere(FVec3(i * 0.5, i * 0.5, i * 0.5), 0.5, new Lambertian(FColorRGB(0.8, 0.3, 0.3)));
+        list[i] = new Sphere(FVec3(i * 0.5, i * 0.5, i * 0.5), 0.5, nullptr);
     }
     BVHNode *node = new BVHNode(list, 10, 0, 0);
     AABB aabb;
@@ -63,7 +63,7 @@ TEST(BVH, Test10SpheresHitRay) {
     static const int sphereNum = 10;
     Hitable *list[sphereNum];
     for (int i = 0; i < sphereNum; i++) {
-        list[i] = new Sphere(FVec3(i * 0.5, i * 0.5, i * 0.5), 0.5, new Lambertian(FColorRGB(0.8, 0.3, 0.3)));
+        list[i] = new Sphere(FVec3(i * 0.5, i * 0.5, i * 0.5), 0.5, nullptr);
     }
     BVHNode *node = new BVHNode(list, 10, 0, 0);
     HitRecord hitRecord;

@@ -8,11 +8,13 @@
 #include "RMath.h"
 #include "MaterialBase.h"
 
+#include "ConstantTex.h"
+#include "Texture.h"
 class Lambertian : public MaterialBase {
 public:
-    RMath::FColorRGB Albedo;
+    Texture* Albedo;
 
-    Lambertian(const RMath::FColorRGB &a) : Albedo(a) {};
+    Lambertian(Texture *texture) : Albedo(texture) {};
 
     bool Scatter(const RMath::Ray &rayIn, const RPhysics::HitRecord &rec, RMath::FVec3 &attenuation,
                  RMath::Ray &scattered) const override;

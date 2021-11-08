@@ -6,6 +6,14 @@
 
 
 namespace RPhysics {
+    void get_sphere_uv(const FVec3 & p, float& u, float& v) {
+        float phi = atan2(p.Z(), p.X());
+        float theta = asin(p.Y());
+        u = 1-(phi + M_PI) / (2*M_PI);
+        v = (theta + M_PI/2) / M_PI;
+    }
+
+
     bool Sphere::Hit(const RMath::Ray &ray, float t_min, float t_max, HitRecord &rec) const {
         RMath::FVec3 Origin2Center = ray.Origin() - Center;
         float a = dot(ray.Direction(), ray.Direction());
@@ -23,6 +31,7 @@ namespace RPhysics {
             if (t[i] < t_max && t[i] > t_min) {
                 rec.t = t[i];
                 rec.p = ray.PointAtParameter(t[i]);
+                get_sphere_uv((rec.p- Center)/Radius,rec.u,rec.v);
                 rec.normal = (rec.p - Center) / Radius;
                 rec.mat = MatPtr;
                 return true;

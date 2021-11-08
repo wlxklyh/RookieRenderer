@@ -12,6 +12,8 @@ class MaterialBase;
 
 namespace RPhysics {
     struct HitRecord {
+        float u;
+        float v;
         float t;
         RMath::FVec3 p;
         RMath::FVec3 normal;

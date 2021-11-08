@@ -11,9 +11,11 @@ using namespace RMath;
 using namespace RPhysics;
 
 Hitable *RandomScene() {
+    Texture *checker = new CheckerTex( new ConstantTex(FColorRGB (0.2,0.3, 0.1)),
+                                       new ConstantTex(FColorRGB(0.9, 0.9, 0.9)));
     int num = 500;
     Hitable **list = new Hitable *[num + 10];
-    list[0] = new Sphere(FVec3(0, -1000, 0), 1000, new Lambertian(FVec3(0.5, 0.5, 0.5)));
+    list[0] = new Sphere(FVec3(0, -1000, 0), 1000, new Lambertian(checker));
     int i = 1;
     for (int a = -11; a < 11; a++) {
         if (i >= num) {
@@ -29,9 +31,9 @@ Hitable *RandomScene() {
                 if (choose_mat < 0.8) {  // diffuse
                     list[i++] = new Sphere(
                             center, 0.2,
-                            new Lambertian(FVec3(RandomDouble() * RandomDouble(),
+                            new Lambertian(new ConstantTex(FVec3(RandomDouble() * RandomDouble(),
                                                  RandomDouble() * RandomDouble(),
-                                                 RandomDouble() * RandomDouble()))
+                                                 RandomDouble() * RandomDouble())))
                     );
                 } else if (choose_mat < 0.95) { // metal
                     list[i++] = new Sphere(
@@ -53,7 +55,7 @@ Hitable *RandomScene() {
 //    list[i++] = new Sphere(FVec3(4, 1, 0), 1.0, new Metal(FVec3(0.7, 0.6, 0.5), 0.0));
 
     list[i++] = new Sphere(FVec3(-4, 1, 5), 1.0, new Dielectric(1.5));
-    list[i++] = new Sphere(FVec3(0, 1, 5), 1.0, new Lambertian(FVec3(237.0 / 255.0, 107.0 / 255.0, 126.0 / 255.0)));
+    list[i++] = new Sphere(FVec3(0, 1, 5), 1.0, new Lambertian(new ConstantTex(FVec3(237.0 / 255.0, 107.0 / 255.0, 126.0 / 255.0))));
     list[i++] = new Sphere(FVec3(4, 1, 5), 1.0, new Metal(FVec3(0.7, 0.6, 0.5), 0.0));
 
 
@@ -96,8 +98,8 @@ int main() {
     // (3)场景里面有两个球
     const int listSize = 5;
     Hitable *list[listSize];
-    list[0] = new Sphere(FVec3(0, 0, -1), 0.5, new Lambertian(FColorRGB(0.8, 0.3, 0.3)));
-    list[1] = new Sphere(FVec3(0, -100.5, -1), 100, new Lambertian(FColorRGB(0.8, 0.8, 0.0)));
+    list[0] = new Sphere(FVec3(0, 0, -1), 0.5, new Lambertian(new ConstantTex(FColorRGB(0.8, 0.3, 0.3))));
+    list[1] = new Sphere(FVec3(0, -100.5, -1), 100, new Lambertian(new ConstantTex(FColorRGB(0.8, 0.8, 0.0))));
     list[2] = new Sphere(FVec3(1, 0, -1), 0.5, new Metal(FColorRGB(0.8, 0.6, 0.2), 0.3));
     list[3] = new Sphere(FVec3(-1, 0, -1), 0.5, new Dielectric(1.5));
     list[4] = new Sphere(FVec3(-1, 0, -1), -0.45, new Dielectric(1.5));

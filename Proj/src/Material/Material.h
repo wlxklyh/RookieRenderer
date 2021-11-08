@@ -8,5 +8,8 @@
 #include "Lambertian.h"
 #include "Metal.h"
 #include "Dielectric.h"
+#include "Texture.h"
+#include "CheckerTex.h"
+#include "ConstantTex.h"
 
 #endif //ROOKIERENDERER_MATERIAL_H
