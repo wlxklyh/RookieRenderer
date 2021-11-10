@@ -58,8 +58,8 @@ Hitable *RandomScene() {
     list[i++] = new Sphere(FVec3(0, 1, 5), 1.0, new Lambertian(new ConstantTex(FVec3(237.0 / 255.0, 107.0 / 255.0, 126.0 / 255.0))));
     list[i++] = new Sphere(FVec3(4, 1, 5), 1.0, new Metal(FVec3(0.7, 0.6, 0.5), 0.0));
 
-
-    return new HitTableList(list, i);
+    return new BVHNode(list, i,0.0,1.0);
+    //return new HitTableList(list, i);
 }
 
 FColorRGB Color(const Ray &ray, Hitable &world, int depth) {
@@ -84,7 +84,7 @@ FColorRGB Color(const Ray &ray, Hitable &world, int depth) {
 
 
 int main() {
-    int nowTime = clock();
+    int startTime = clock();
     std::ofstream out;
     out.open("OutputPic.ppm");
 
@@ -94,9 +94,9 @@ int main() {
     int PicH = 100;
     int SamplesPerPixel = 1;
 
-    PicW = 2000;
-    PicH = 1000;
-    SamplesPerPixel = 100;
+    PicW = 200;
+    PicH = 100;
+    SamplesPerPixel = 1;
 
     // （2）这个是ppm图片格式 后面渲染的结果用这个来显示
     out << "P3\n" << PicW << " " << PicH << "\n255\n";
@@ -136,12 +136,17 @@ int main() {
             int ib = int(255.99 * color[2]);
             out << ir << " " << ig << " " << ib << "\n";
         }
+        float costTime = (float)(clock() - startTime)/ (float) CLOCKS_PER_SEC / 60.0f;
+        float nowProgress = ((PicH - y) * 1.0f) / (PicH * 1.0f);
+        std::cout<<"Progress:"<< nowProgress * 100 << "% "
+        << "Already cost:" << costTime << " minutes"
+        << " Still need:" << costTime / nowProgress * (1-nowProgress)<< " minutes\n";
     }
     std::ofstream outTime;
     outTime.open("OutputTime.txt");
 
     outTime << "Width:" << PicW << " Height:" << PicH << " Samples:" << SamplesPerPixel << "\n";
-    outTime << float(clock() - nowTime) / (float) CLOCKS_PER_SEC << " seconds\n";
+    outTime << float(clock() - startTime) / (float) CLOCKS_PER_SEC / 60.0f << " minutes\n";
     out.close();
 
     // 打开结果图片

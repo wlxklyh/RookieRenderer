@@ -3,11 +3,11 @@
 <!-- TOC -->
 
 - [RookieRenderer](#rookierenderer)
-    - [1. Ray Tracing in a weekend Practice Proj](#1-ray-tracing-in-a-weekend-practice-proj)
-        - [Build](#build)
-        - [Step Pic](#step-pic)
-    - [2. Ray Tracing The Next Week Practice Proj](#2-ray-tracing-the-next-week-practice-proj)
-        - [Step Pic](#step-pic-1)
+  - [1. Ray Tracing in a weekend Practice Proj](#1-ray-tracing-in-a-weekend-practice-proj)
+    - [Build](#build)
+    - [Step Pic](#step-pic)
+  - [2. Ray Tracing The Next Week Practice Proj](#2-ray-tracing-the-next-week-practice-proj)
+    - [Step Pic](#step-pic-1)
 
 <!-- /TOC -->
 ## 1. Ray Tracing in a weekend Practice Proj
@@ -55,4 +55,5 @@ You can checkout the version you want:
 |Chapter|Pic|Descript|
 |-|-|-|
 |Chapter1 Motion Blur|||
-|Chapter2 BVH|||
+|Chapter2 BVH|![](Img/NextWeekChapter3TimeData.png) ![](Img/costtimecompare.png)||
+|Chapter3 Solid Texture|![](Img/OutputPic1000x2000x100SppNextWeekChapter3.jpg)||
