@@ -11,5 +11,5 @@
 #include "Texture.h"
 #include "CheckerTex.h"
 #include "ConstantTex.h"
-
+#include "NoiseTex.h"
 #endif //ROOKIERENDERER_MATERIAL_H

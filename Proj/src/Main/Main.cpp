@@ -13,9 +13,9 @@ using namespace RPhysics;
 Hitable *RandomScene() {
     Texture *checker = new CheckerTex( new ConstantTex(FColorRGB (0.2,0.3, 0.1)),
                                        new ConstantTex(FColorRGB(0.9, 0.9, 0.9)));
-    int num = 500;
+    int num = 1;
     Hitable **list = new Hitable *[num + 10];
-    list[0] = new Sphere(FVec3(0, -1000, 0), 1000, new Lambertian(checker));
+    list[0] = new Sphere(FVec3(0, -1000, 0), 1000, new Lambertian(new NoiseTex(4)));
     int i = 1;
     for (int a = -11; a < 11; a++) {
         if (i >= num) {
@@ -54,9 +54,9 @@ Hitable *RandomScene() {
 //    list[i++] = new Sphere(FVec3(-4, 1, 0), 1.0, new Lambertian(FVec3(0.4, 0.2, 0.1)));
 //    list[i++] = new Sphere(FVec3(4, 1, 0), 1.0, new Metal(FVec3(0.7, 0.6, 0.5), 0.0));
 
-    list[i++] = new Sphere(FVec3(-4, 1, 5), 1.0, new Dielectric(1.5));
-    list[i++] = new Sphere(FVec3(0, 1, 5), 1.0, new Lambertian(new ConstantTex(FVec3(237.0 / 255.0, 107.0 / 255.0, 126.0 / 255.0))));
-    list[i++] = new Sphere(FVec3(4, 1, 5), 1.0, new Metal(FVec3(0.7, 0.6, 0.5), 0.0));
+    list[i++] = new Sphere(FVec3(-4, 1, 5), 1.0, new Lambertian(new NoiseTex(4)));
+    list[i++] = new Sphere(FVec3(0, 1, 5), 1.0, new Lambertian(new NoiseTex(0.1f)));
+    list[i++] = new Sphere(FVec3(4, 1, 5), 1.0, new Lambertian(new NoiseTex(1)));
 
     return new BVHNode(list, i,0.0,1.0);
     //return new HitTableList(list, i);
@@ -94,9 +94,9 @@ int main() {
     int PicH = 100;
     int SamplesPerPixel = 1;
 
-    PicW = 200;
-    PicH = 100;
-    SamplesPerPixel = 1;
+    PicW = 2000;
+    PicH = 1000;
+    SamplesPerPixel = 100;
 
     // （2）这个是ppm图片格式 后面渲染的结果用这个来显示
     out << "P3\n" << PicW << " " << PicH << "\n255\n";

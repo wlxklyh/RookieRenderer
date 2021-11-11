@@ -9,5 +9,6 @@
 #include "Vec3.h"
 #include "Ray.h"
 #include "MathUtil.h"
+#include "Perlin.h"
 
 #endif //ROOKIERENDERER_RMATH_H

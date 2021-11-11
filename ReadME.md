@@ -57,3 +57,4 @@ You can checkout the version you want:
 |Chapter1 Motion Blur|||
 |Chapter2 BVH|![](Img/NextWeekChapter3TimeData.png) ![](Img/costtimecompare.png)||
 |Chapter3 Solid Texture|![](Img/OutputPic1000x2000x100SppNextWeekChapter3.jpg)||
+|Chapter4 PerlinNoise|![](Img/OutputPic1000x2000x100SppNextWeekChapter4.jpg)||

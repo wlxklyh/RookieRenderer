@@ -6,5 +6,8 @@
 
 namespace RMath {
 
-
+    int RandInt(int MIN,int MAX){
+        std::uniform_int_distribution<int> distr(MIN, MAX);
+        return distr(eng);
+    }
 }
