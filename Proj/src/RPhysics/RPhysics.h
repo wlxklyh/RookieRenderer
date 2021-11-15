@@ -10,5 +10,7 @@
 #include "Hitable.h"
 #include "HitTableList.h"
 #include "Sphere.h"
+#include "Rect.h"
+#include "Box.h"
 
 #endif //ROOKIERENDERER_RPHYSICS_H

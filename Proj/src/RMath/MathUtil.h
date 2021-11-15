@@ -27,5 +27,12 @@ namespace RMath {
 
     int RandInt(int MIN,int MAX);
 
+    template<class T>
+    bool NearZero(T value){
+        if(abs(value) < MINFLOAT) {
+            return true;
+        }
+        return false;
+    }
 }
 #endif //ROOKIERENDERER_MATHUTIL_H

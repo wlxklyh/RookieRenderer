@@ -16,7 +16,7 @@ namespace RPhysics {
 
         AABB() {};
 
-        AABB(RMath::FVec3 &min, RMath::FVec3 &max) {
+        AABB(const RMath::FVec3 &min,const  RMath::FVec3 &max) {
             MaxV = max;
             MinV = min;
         }

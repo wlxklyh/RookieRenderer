@@ -12,4 +12,6 @@
 #include "CheckerTex.h"
 #include "ConstantTex.h"
 #include "NoiseTex.h"
+#include "DiffuseLight.h"
+
 #endif //ROOKIERENDERER_MATERIAL_H

@@ -22,9 +22,18 @@ namespace RPhysics {
 
     class Hitable {
     public:
+        //这个碰撞体的碰撞函数
         virtual bool Hit(const RMath::Ray &ray, float t_min, float t_max, HitRecord &rec) const = 0;
-
+        //这个碰撞体的包围盒：获取当前碰撞体的包围盒 这样就可以计算BVH的merge
         virtual bool BoundindBox(float t0, float t1, AABB &box) const = 0;
+    };
+
+    class FlipNormals : public Hitable {
+    public:
+        Hitable *ptr;
+        FlipNormals(Hitable *p) : ptr(p) {}
+        virtual bool Hit(const Ray& r, float t_min, float t_max, HitRecord& rec) const;
+        virtual bool BoundindBox(float t0, float t1, AABB& box) const;
     };
 }
 

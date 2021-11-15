@@ -8,6 +8,8 @@
     - [Step Pic](#step-pic)
   - [2. Ray Tracing The Next Week Practice Proj](#2-ray-tracing-the-next-week-practice-proj)
     - [Step Pic](#step-pic-1)
+  - [3. Ray Tracing The Rest Of Your Life](#3-ray-tracing-the-rest-of-your-life)
+    - [Step Pic](#step-pic-2)
 
 <!-- /TOC -->
 ## 1. Ray Tracing in a weekend Practice Proj
@@ -58,3 +60,11 @@ You can checkout the version you want:
 |Chapter2 BVH|![](Img/NextWeekChapter3TimeData.png) ![](Img/costtimecompare.png)||
 |Chapter3 Solid Texture|![](Img/OutputPic1000x2000x100SppNextWeekChapter3.jpg)||
 |Chapter4 PerlinNoise|![](Img/OutputPic1000x2000x100SppNextWeekChapter4.jpg)||
+
+## 3. Ray Tracing The Rest Of Your Life
+
+### Step Pic
+
+|Chapter|Pic|Descript|
+|-|-|-|
+|bruteforce cornel box|![](Img/OutputPic.jpg)||
