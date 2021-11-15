@@ -24,7 +24,9 @@ RMath::FVec3 RandomInUnitSphere();
 class MaterialBase {
 public:
     virtual bool Scatter(const RMath::Ray &rayIn, const RPhysics::HitRecord &rec,
-                         RMath::FVec3 &attenuation, RMath::Ray &scattered) const = 0;
+                         RMath::FVec3 &attenuation, RMath::Ray &scattered) const {
+        return false;
+    };
 
 
     virtual FVec3 Emitted(const Ray& r_in, const RPhysics::HitRecord& rec, float u, float v, const FVec3& p) const { return FVec3(0,0,0); }

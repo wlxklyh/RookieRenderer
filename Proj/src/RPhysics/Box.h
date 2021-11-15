@@ -6,6 +6,7 @@
 #define ROOKIERENDERER_BOX_H
 
 #include "Hitable.h"
+#include "HitTableList.h"
 #include "Rect.h"
 namespace RPhysics{
     class Box: public Hitable  {

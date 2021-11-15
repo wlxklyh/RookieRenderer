@@ -6,6 +6,7 @@
 #include "Framework.h"
 #include "Material.h"
 #include "Camera.h"
+#include "Config.h"
 
 using namespace RMath;
 using namespace RPhysics;
@@ -64,15 +65,15 @@ Hitable *RandomScene() {
 
 Hitable *CornelBox() {
     int i = 0;
-    Hitable **list = new Hitable*[7];
+    Hitable **list = new Hitable*[8];
     MaterialBase *red = new Lambertian( new ConstantTex(FVec3(0.65, 0.05, 0.05)) );
     MaterialBase *white = new Lambertian( new ConstantTex(FVec3(0.73, 0.73, 0.73)) );
     MaterialBase *green = new Lambertian( new ConstantTex(FVec3(0.12, 0.45, 0.15)) );
-    //MaterialBase *light = new diffuse_light( new ConstantTex(FVec3(15, 15, 15)) );
+    MaterialBase *light = new DiffuseLight( new ConstantTex(FVec3(15, 15, 15)) );
 
     list[i++] = new FlipNormals(new YZRect(0, 555, 0, 555, 555, green));
     list[i++] = new YZRect(0, 555, 0, 555, 0, red);
-////    list[i++] = new flip_normals(new XZRect(213, 343, 227, 332, 554, light));
+    list[i++] = new FlipNormals(new XZRect(213, 343, 227, 332, 554, light));
     list[i++] = new FlipNormals(new XZRect(0, 555, 0, 555, 555, white));
     list[i++] = new XZRect(0, 555, 0, 555, 0, white);
     list[i++] = new FlipNormals(new XYRect (0, 555, 0, 555, 555, white));
@@ -81,8 +82,6 @@ Hitable *CornelBox() {
     MaterialBase *mirr = new Metal(FVec3(0.7, 0.6, 0.5), 0.0);
     list[i++] = new Sphere(FVec3(130, 90, 130),90 , glass);
     list[i++] = new Sphere(FVec3(395,90,310),90 , mirr);
-
-    Hitable *scene = new HitTableList(list,i);
 
     return new BVHNode(list, i,0.0,1.0);
     //return new HitTableList(list, i);
@@ -93,36 +92,33 @@ FColorRGB Color(const Ray &ray, Hitable &world, int depth) {
     if (world.Hit(ray, 0.0001, MAXFLOAT, hitRecord)) {
         Ray scattered;
         FColorRGB attenuation;
+        FColorRGB emitted = hitRecord.mat->Emitted(ray, hitRecord, hitRecord.u, hitRecord.v, hitRecord.p);
         if (depth < 50 && hitRecord.mat->Scatter(ray, hitRecord, attenuation, scattered)) {
             FColorRGB retColor = Color(scattered, world, depth + 1);
             return retColor * attenuation;
         } else {
-            return FColorRGB(0, 0, 0);
+            return emitted;
         }
     } else {
-        FVec3 dir = ray.Direction();
-        FVec3 unitDir = unit_vector(dir);
-        float lerpValue = 0.5 * (unitDir.Y() + 1.0);
-        return (1 - lerpValue) * FColorRGB(1.0, 1.0, 1.0) + lerpValue * FColorRGB(0.5, 0.7, 1.0);
+//        FVec3 dir = ray.Direction();
+//        FVec3 unitDir = unit_vector(dir);
+//        float lerpValue = 0.5 * (unitDir.Y() + 1.0);
+//        return (1 - lerpValue) * FColorRGB(1.0, 1.0, 1.0) + lerpValue * FColorRGB(0.5, 0.7, 1.0);
+        //天空盒为黑色
+        return FColorRGB(0,0,0);
     }
-
 }
 
-
-int main() {
+void RunConfig(const Config& config){
     int startTime = clock();
     std::ofstream out;
-    out.open("OutputPic.ppm");
+    out.open(config.GetPPmFileName());
 
     //（1）宽高
-    int PicW = 500;
-    int PicH = 500;
-    int SamplesPerPixel = 1;
-
-//    PicW = 2000;
-//    PicH = 1000;
-//    SamplesPerPixel = 100;
-
+    int PicW = config.PicW;
+    int PicH = config.PicH;
+    int SamplesPerPixel = config.SamplesPerPixel;
+    std::string dec = config.GetProgressTips();
     // （2）这个是ppm图片格式 后面渲染的结果用这个来显示
     out << "P3\n" << PicW << " " << PicH << "\n255\n";
 
@@ -135,7 +131,7 @@ int main() {
     float vfov = 40.0;
     float aspect = float(PicH) / float(PicW);
     Camera *cam = new Camera(lookfrom, lookat, FVec3(0,1,0),
-                      vfov, aspect, aperture, dist_to_focus);
+                             vfov, aspect, aperture, dist_to_focus);
     for (int y = PicH - 1; y >= 0; y--) {
         for (int x = 0; x < PicW; x++) {
 
@@ -157,12 +153,12 @@ int main() {
         }
         float costTime = (float)(clock() - startTime)/ (float) CLOCKS_PER_SEC / 60.0f;
         float nowProgress = ((PicH - y) * 1.0f) / (PicH * 1.0f);
-        std::cout<<"Progress:"<< nowProgress * 100 << "% "
-        << "Already cost:" << costTime << " minutes"
-        << " Still need:" << costTime / nowProgress * (1-nowProgress)<< " minutes\n";
+        std::cout<< dec <<"Progress:"<< nowProgress * 100 << "% "
+                 << "Already cost:" << costTime << " minutes"
+                 << " Still need:" << costTime / nowProgress * (1-nowProgress)<< " minutes\n";
     }
     std::ofstream outTime;
-    outTime.open("OutputTime.txt");
+    outTime.open(config.GetLogFileName());
 
     outTime << "Width:" << PicW << " Height:" << PicH << " Samples:" << SamplesPerPixel << "\n";
     outTime << float(clock() - startTime) / (float) CLOCKS_PER_SEC / 60.0f << " minutes\n";
@@ -170,16 +166,16 @@ int main() {
 
     // 打开结果图片
 #ifdef _WIN32
-    system(" start .\\OutputPic.ppm");
+    system(config.GetWinOpenCmd().c_str());
     //define something for Windows (32-bit and 64-bit, this part is common)
 #ifdef _WIN64
-      //define something for Windows (64-bit only)
+    //define something for Windows (64-bit only)
 #else
-      //define something for Windows (32-bit only)
+    //define something for Windows (32-bit only)
 #endif
 #elif __APPLE__
 
-#include "TargetConditionals.h"
+    #include "TargetConditionals.h"
 
 #if TARGET_IPHONE_SIMULATOR
     // iOS Simulator
@@ -187,7 +183,7 @@ int main() {
     // iOS device
 #elif TARGET_OS_MAC
     // Other kinds of Mac OS
-    FILE *pp = popen("open OutputPic.ppm", "r");
+    FILE *pp = popen(GetMacOpenCmd.c_str(), "r");
 #else
 #   error "Unknown Apple platform"
 #endif
@@ -203,5 +199,16 @@ int main() {
 #   error "Unknown compiler"
 #endif
 
+}
+
+int main() {
+    RunConfig(Config("CornelBox",500,500,1));
+    RunConfig(Config("CornelBox",500,500,8));
+    RunConfig(Config("CornelBox",500,500,12));
+    RunConfig(Config("CornelBox",500,500,40));
+    RunConfig(Config("CornelBox",500,500,200));
+    RunConfig(Config("CornelBox",500,500,1000));
+    RunConfig(Config("CornelBox",500,500,5000));
+    RunConfig(Config("CornelBox",500,500,25000));
     return 0;
 }

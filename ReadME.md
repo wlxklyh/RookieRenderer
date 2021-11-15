@@ -67,4 +67,4 @@ You can checkout the version you want:
 
 |Chapter|Pic|Descript|
 |-|-|-|
-|bruteforce cornel box|![](Img/OutputPic.jpg)||
+|bruteforce cornel box|![](Img/bruteforce_cornel_box.png)||

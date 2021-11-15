@@ -6,17 +6,14 @@
 #define ROOKIERENDERER_DIFFUSELIGHT_H
 
 #include "MaterialBase.h"
-//class DiffuseLight :public MaterialBase {
-//public:
-//    DiffuseLight(texture *a) : emit(a) {}
-//    virtual vec3 emitted(const ray& r_in, const hit_record& rec, float u, float v, const vec3& p) const {
-//        if (dot(rec.normal, r_in.direction()) < 0.0)
-//            return emit->value(u, v, p);
-//        else
-//            return vec3(0,0,0);
-//    }
-//    texture *emit;
-//};
+#include "Texture.h"
+
+class DiffuseLight :public MaterialBase {
+public:
+    DiffuseLight(Texture *t) : emit(t) {}
+    virtual FVec3 Emitted(const Ray& r_in, const RPhysics::HitRecord& rec, float u, float v, const FVec3& p) const;
+    Texture *emit;
+};
 
 
 #endif //ROOKIERENDERER_DIFFUSELIGHT_H
