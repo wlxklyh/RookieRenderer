@@ -71,12 +71,18 @@ Hitable *CornelBox() {
     MaterialBase *green = new Lambertian( new ConstantTex(FVec3(0.12, 0.45, 0.15)) );
     MaterialBase *light = new DiffuseLight( new ConstantTex(FVec3(15, 15, 15)) );
 
-    list[i++] = new FlipNormals(new YZRect(0, 555, 0, 555, 555, green));
-    list[i++] = new YZRect(0, 555, 0, 555, 0, red);
+
+    MaterialBase *liteRed = new Lambertian( new ConstantTex(FVec3(0.75, 0.25, 0.25)) );
+    MaterialBase *litewhite = new Lambertian( new ConstantTex(FVec3(0.75, 0.75, 0.75)) );
+    MaterialBase *liteBlue = new Lambertian( new ConstantTex(FVec3(0.25, 0.25, 0.75)) );
+
+
+    list[i++] = new FlipNormals(new YZRect(0, 555, 0, 555, 555, liteBlue));
+    list[i++] = new YZRect(0, 555, 0, 555, 0, liteRed);
     list[i++] = new FlipNormals(new XZRect(213, 343, 227, 332, 554, light));
-    list[i++] = new FlipNormals(new XZRect(0, 555, 0, 555, 555, white));
-    list[i++] = new XZRect(0, 555, 0, 555, 0, white);
-    list[i++] = new FlipNormals(new XYRect (0, 555, 0, 555, 555, white));
+    list[i++] = new FlipNormals(new XZRect(0, 555, 0, 555, 555, litewhite));
+    list[i++] = new XZRect(0, 555, 0, 555, 0, litewhite);
+    list[i++] = new FlipNormals(new XYRect (0, 555, 0, 555, 555, litewhite));
 
     MaterialBase *glass = new Dielectric(1.5);
     MaterialBase *mirr = new Metal(FVec3(0.7, 0.6, 0.5), 0.0);
