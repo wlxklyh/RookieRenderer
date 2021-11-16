@@ -16,7 +16,11 @@
 ![windows](https://github.com/wlxklyh/RookieRenderer/actions/workflows/cmake-win.yml/badge.svg) ![macOS](https://github.com/wlxklyh/RookieRenderer/actions/workflows/macos-ci.yml/badge.svg)
 
 ## Final Result
+
+----
 ![](Img/BasicPpathTracing/CornelBox500x500x25000sppResultPic.jpg)
+
+----
 ![](Img/OutputPic.jpg)
 ![](Img/OutputPic1000x2000x100SppNextWeekChapter3.jpg)
 
