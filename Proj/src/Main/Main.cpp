@@ -124,11 +124,6 @@ void RunConfig(const Config& config){
 
     Hitable *world = CornelBox();
     //（4）相机
-    FVec3 lookfrom(0, 50, -400);
-    FVec3 lookat(0,0,0);
-    float dist_to_focus = 10.0;
-    float aperture = 0.0;
-    float vfov = 40.0;
     float aspect = float(PicH) / float(PicW);
     Camera *cam = new Camera(config.LookFrom, config.LookAt, FVec3(0,1,0),
                              config.VFov, aspect, config.Aperture, config.DistToFocus);
