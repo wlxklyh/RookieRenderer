@@ -3,6 +3,7 @@
 <!-- TOC -->
 
 - [RookieRenderer](#rookierenderer)
+  - [Final Result](#final-result)
   - [1. Ray Tracing in a weekend Practice Proj](#1-ray-tracing-in-a-weekend-practice-proj)
     - [Build](#build)
     - [Step Pic](#step-pic)
@@ -12,10 +13,15 @@
     - [Step Pic](#step-pic-2)
 
 <!-- /TOC -->
-## 1. Ray Tracing in a weekend Practice Proj
 ![windows](https://github.com/wlxklyh/RookieRenderer/actions/workflows/cmake-win.yml/badge.svg) ![macOS](https://github.com/wlxklyh/RookieRenderer/actions/workflows/macos-ci.yml/badge.svg)
 
+## Final Result
+![](Img/BasicPpathTracing/CornelBox500x500x25000sppResultPic.jpg)
 ![](Img/OutputPic.jpg)
+
+## 1. Ray Tracing in a weekend Practice Proj
+
+
 This project is a practice program for [Ray Tracing in One Weekend](https://raytracing.github.io/books/RayTracingInOneWeekend.html). Petershirley YYDS.
 ### Build
 
@@ -65,6 +71,13 @@ You can checkout the version you want:
 
 ### Step Pic
 
-|Chapter|Pic|Descript|
+|Title|Pic|Time|
 |-|-|-|
-|bruteforce cornel box|![](Img/bruteforce_cornel_box.png)||
+|Basic path tracing 1spp|![](Img/BasicPpathTracing/CornelBox500x500x1sppResultPic.jpg)|1spp|
+|Basic path tracing 8spp|![](Img/BasicPpathTracing/CornelBox500x500x8sppResultPic.jpg)|8spp|
+|Basic path tracing 12spp|![](Img/BasicPpathTracing/CornelBox500x500x12sppResultPic.jpg)|12spp|
+|Basic path tracing 40spp|![](Img/BasicPpathTracing/CornelBox500x500x40sppResultPic.jpg)|40spp|
+|Basic path tracing 200spp|![](Img/BasicPpathTracing/CornelBox500x500x200sppResultPic.jpg)|200spp|
+|Basic path tracing 1000spp|![](Img/BasicPpathTracing/CornelBox500x500x1000sppResultPic.jpg)|1000spp|
+|Basic path tracing 5000spp|![](Img/BasicPpathTracing/CornelBox500x500x5000sppResultPic.jpg)|5000spp|
+|Basic path tracing 25000spp|![](Img/BasicPpathTracing/CornelBox500x500x25000sppResultPic.jpg)|25000spp|
