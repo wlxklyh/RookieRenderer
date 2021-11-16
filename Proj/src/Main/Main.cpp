@@ -124,14 +124,14 @@ void RunConfig(const Config& config){
 
     Hitable *world = CornelBox();
     //（4）相机
-    FVec3 lookfrom(278, 278, -800);
-    FVec3 lookat(278,278,0);
+    FVec3 lookfrom(0, 50, -400);
+    FVec3 lookat(0,0,0);
     float dist_to_focus = 10.0;
     float aperture = 0.0;
     float vfov = 40.0;
     float aspect = float(PicH) / float(PicW);
-    Camera *cam = new Camera(lookfrom, lookat, FVec3(0,1,0),
-                             vfov, aspect, aperture, dist_to_focus);
+    Camera *cam = new Camera(config.LookFrom, config.LookAt, FVec3(0,1,0),
+                             config.VFov, aspect, config.Aperture, config.DistToFocus);
     for (int y = PicH - 1; y >= 0; y--) {
         for (int x = 0; x < PicW; x++) {
 
@@ -149,6 +149,10 @@ void RunConfig(const Config& config){
             int ir = int(255.99 * color[0]);
             int ig = int(255.99 * color[1]);
             int ib = int(255.99 * color[2]);
+            ir = ir < 255 ? ir: 255;
+            ig = ig < 255 ? ig: 255;
+            ib = ib < 255 ? ib: 255;
+
             out << ir << " " << ig << " " << ib << "\n";
         }
         float costTime = (float)(clock() - startTime)/ (float) CLOCKS_PER_SEC / 60.0f;
@@ -202,13 +206,18 @@ void RunConfig(const Config& config){
 }
 
 int main() {
-    RunConfig(Config("CornelBox",500,500,1));
-    RunConfig(Config("CornelBox",500,500,8));
-    RunConfig(Config("CornelBox",500,500,12));
-    RunConfig(Config("CornelBox",500,500,40));
-    RunConfig(Config("CornelBox",500,500,200));
-    RunConfig(Config("CornelBox",500,500,1000));
-    RunConfig(Config("CornelBox",500,500,5000));
-    RunConfig(Config("CornelBox",500,500,25000));
+
+    // glass camera
+    RunConfig(Config("CornelBox",500,500,12,FVec3(0, 50, -400),FVec3(0,0,0)));
+
+
+    RunConfig(Config("CornelBox",500,500,1,FVec3(278, 278, -800),FVec3(278,278,0)));
+    RunConfig(Config("CornelBox",500,500,8,FVec3(278, 278, -800),FVec3(278,278,0)));
+    RunConfig(Config("CornelBox",500,500,12,FVec3(278, 278, -800),FVec3(278,278,0)));
+    RunConfig(Config("CornelBox",500,500,40,FVec3(278, 278, -800),FVec3(278,278,0)));
+    RunConfig(Config("CornelBox",500,500,200,FVec3(278, 278, -800),FVec3(278,278,0)));
+    RunConfig(Config("CornelBox",500,500,1000,FVec3(278, 278, -800),FVec3(278,278,0)));
+    RunConfig(Config("CornelBox",500,500,5000,FVec3(278, 278, -800),FVec3(278,278,0)));
+    RunConfig(Config("CornelBox",500,500,25000,FVec3(278, 278, -800),FVec3(278,278,0)));
     return 0;
 }

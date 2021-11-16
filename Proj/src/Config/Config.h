@@ -7,6 +7,7 @@
 
 #include <string>
 #include <sstream>
+#include "RMath.h"
 
 class Config {
 public:
@@ -14,9 +15,16 @@ public:
     int PicH;
     int PicW;
     int SamplesPerPixel;
+    RMath::FVec3 LookFrom;
+    RMath::FVec3 LookAt;
+    float DistToFocus = 10.0;
+    float Aperture = 0.0;
+    float VFov = 40.0;
 
-    Config(std::string _Dec, int _PicH, int _PicW, int _SamplesPerPixel) :
-            Dec(_Dec), PicH(_PicH), PicW(_PicW), SamplesPerPixel(_SamplesPerPixel) {};
+    Config(std::string _Dec, int _PicH, int _PicW, int _SamplesPerPixel, const FVec3& lookfrom, const FVec3& lookat,
+           float dist_to_focus = 10.0, float aperture = 0.0, float vfov = 40.0) :
+            Dec(_Dec), PicH(_PicH), PicW(_PicW), SamplesPerPixel(_SamplesPerPixel), LookFrom(lookfrom),
+            LookAt(lookat),DistToFocus(dist_to_focus),Aperture(aperture),VFov(vfov){};
 
     std::string GetProgressTips() const {
         std::stringstream ss;
