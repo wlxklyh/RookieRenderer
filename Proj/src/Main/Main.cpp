@@ -209,7 +209,7 @@ void RunConfig(const Config& config){
 int main() {
 
     // glass camera
-    RunConfig(Config("CornelBox",500,500,12,FVec3(0, 50, -400),FVec3(0,0,0)));
+    //RunConfig(Config("CornelBox",500,500,12,FVec3(0, 50, -400),FVec3(0,0,0)));
 
 
     RunConfig(Config("CornelBox",500,500,1,FVec3(278, 278, -800),FVec3(278,278,0)));

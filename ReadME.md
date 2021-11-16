@@ -19,6 +19,7 @@
 
 ----
 ![](Img/BasicPpathTracing/CornelBox500x500x25000sppResultPic.jpg)
+![](Img/BasicPathTracing-blueredResult/CornelBox500x500x25000sppResultPic.jpg)
 
 ----
 ![](Img/OutputPic.jpg)
