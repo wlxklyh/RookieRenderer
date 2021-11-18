@@ -1,11 +1,13 @@
 //
 // Created by linyanhou on 2021/10/18.
 //
-#ifdef _WIN32
+
 #ifndef ROOKIERENDERER_PLATWINDOWS_H
 #define ROOKIERENDERER_PLATWINDOWS_H
 
+#define MINFLOAT 0.0000000000001f
 
+#ifdef _WIN32
 #ifndef DRAND48_H
 #define DRAND48_H
 
@@ -13,7 +15,7 @@
 
 #define _USE_MATH_DEFINES
 #define MAXFLOAT 99999999999999999.0f
-#define MINFLOAT 0.0000000000001f
+
 
 #define RAND_TEMP_M 0x100000000LL
 #define RAND_TEMP_C 0xB16
@@ -30,7 +32,9 @@ void srand48(unsigned int i);
 class PlatWindows {
 
 };
+#else
 
+#endif
 
 #endif //ROOKIERENDERER_PLATWINDOWS_H
-#endif
+

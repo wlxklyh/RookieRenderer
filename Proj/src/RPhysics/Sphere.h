@@ -15,13 +15,14 @@ namespace RPhysics {
         float Radius;
         MaterialBase *MatPtr;
 
-        Sphere() {};
+        Sphere() { MatPtr = nullptr; };
 
-        Sphere(RMath::FVec3 center, float radius, MaterialBase *matPtr) : Center(center), Radius(radius), MatPtr(matPtr) {};
+        Sphere(RMath::FVec3 center, float radius, MaterialBase *matPtr) : Center(center), Radius(radius),
+                                                                          MatPtr(matPtr) {};
 
         virtual bool Hit(const RMath::Ray &ray, float t_min, float t_max, HitRecord &rec) const override;
 
-        virtual bool BoundindBox(float t0, float t1, AABB& box) const override;
+        virtual bool BoundindBox(float t0, float t1, AABB &box) const override;
     };
 }
 
