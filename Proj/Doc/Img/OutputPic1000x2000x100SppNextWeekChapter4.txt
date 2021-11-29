@@ -1,0 +1,2 @@
+Width:2000 Height:1000 Samples:100
+1.9927 minutes
