@@ -28,7 +28,7 @@ namespace RPhysics {
         }
         float f_r;
         float pdf;
-        Ray scattered;
+        Ray scatterRay;
     };
 
     class Hitable {

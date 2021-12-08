@@ -30,7 +30,7 @@ FColorRGB PathIntegrator::Li(const Ray &ray, RPhysics::Hitable &world, int depth
     double p_RR = 0.6;
     double rValue = drand48();
     if(rValue < p_RR){
-        return Li(scatterRecord.scattered, world, depth + 1) * scatterRecord.f_r * attenuation / scatterRecord.pdf / p_RR;
+        return Li(scatterRecord.scatterRay, world, depth + 1) * scatterRecord.f_r * attenuation / scatterRecord.pdf / p_RR;
     }
     else
     {

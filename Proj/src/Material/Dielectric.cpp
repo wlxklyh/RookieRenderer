@@ -32,8 +32,8 @@ bool Dielectric::Scatter(const RMath::Ray &ray, const RPhysics::HitRecord &rec,
     else
         reflect_prob = 1.0;
     if (RandomDouble() < reflect_prob)
-        scatterRecord.scattered = RMath::Ray(rec.p, reflected);
+        scatterRecord.scatterRay = RMath::Ray(rec.p, reflected);
     else
-        scatterRecord.scattered = RMath::Ray(rec.p, refracted);
+        scatterRecord.scatterRay = RMath::Ray(rec.p, refracted);
     return true;
 }
