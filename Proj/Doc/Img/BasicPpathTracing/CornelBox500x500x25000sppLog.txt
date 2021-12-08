@@ -1,0 +1,2 @@
+Width:500 Height:500 Samples:25000
+161.271 minutes

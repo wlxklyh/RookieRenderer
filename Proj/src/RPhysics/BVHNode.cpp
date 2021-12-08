@@ -48,7 +48,8 @@ namespace RPhysics {
     }
 
     bool BVHNode::Hit(const RMath::Ray &ray, float t_min, float t_max, HitRecord &rec) const {
-        if (BoundingAABB.Hit(ray, t_min, t_max)) {
+        if (BoundingAABB.Hit(ray, t_min, t_max))
+        {
             HitRecord leftRec;
             HitRecord rightRec;
             bool hitLeft = Left->Hit(ray, t_min, t_max, leftRec);
@@ -66,7 +67,10 @@ namespace RPhysics {
             } else if (hitRight) {
                 rec = rightRec;
                 return true;
+            }else{
+                return false;
             }
+
         } else {
             return false;
         }

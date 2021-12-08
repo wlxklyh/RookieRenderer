@@ -12,6 +12,7 @@ class MaterialBase;
 
 namespace RPhysics {
     struct HitRecord {
+        HitRecord(){mat = nullptr;}
         float u;
         float v;
         float t;
