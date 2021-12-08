@@ -16,7 +16,7 @@ public:
 
     Lambertian(Texture *texture) : Albedo(texture) {};
 
-    bool Scatter(const RMath::Ray &rayIn, const RPhysics::HitRecord &rec, RMath::FVec3 &attenuation,
+    bool Scatter(const RMath::Ray &rayIn, const RPhysics::HitRecord &rec,
                  RPhysics::ScatterRecord &scatterRecord) const override;
 };
 

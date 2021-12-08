@@ -6,11 +6,11 @@
 #include "RPhysics.h"
 
 bool Dielectric::Scatter(const RMath::Ray &ray, const RPhysics::HitRecord &rec,
-                         RMath::FVec3 &attenuation, RPhysics::ScatterRecord &scatterRecord) const {
+                         RPhysics::ScatterRecord &scatterRecord) const {
     RMath::FVec3 outwardNormal;
     RMath::FVec3 reflected = Reflect(ray.Direction(), rec.normal);
     float ni_over_nt;
-    attenuation = RMath::FVec3(1.0, 1.0, 1.0);
+    scatterRecord.f_r = RMath::FVec3(1.0, 1.0, 1.0);
     RMath::FVec3 refracted;
     float reflect_prob;
     float cosine;

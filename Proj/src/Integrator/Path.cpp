@@ -19,9 +19,9 @@ FColorRGB PathIntegrator::Li(const Ray &ray, RPhysics::Hitable &world, int depth
     }
 
     RPhysics::ScatterRecord scatterRecord;
-    FColorRGB attenuation;
+
     //(3)光源没有散射 Scatter会返回false 所以直接去返回emitted了
-    if (hitRecord.mat->Scatter(ray, hitRecord, attenuation, scatterRecord) == false) {
+    if (hitRecord.mat->Scatter(ray, hitRecord,  scatterRecord) == false) {
         FColorRGB emitted = hitRecord.mat->Emitted(ray, hitRecord, hitRecord.u, hitRecord.v, hitRecord.p);
         return emitted;
     }
@@ -30,7 +30,7 @@ FColorRGB PathIntegrator::Li(const Ray &ray, RPhysics::Hitable &world, int depth
     double p_RR = 0.6;
     double rValue = drand48();
     if(rValue < p_RR){
-        return Li(scatterRecord.scatterRay, world, depth + 1) * scatterRecord.f_r * attenuation / scatterRecord.pdf / p_RR;
+        return Li(scatterRecord.scatterRay, world, depth + 1) * scatterRecord.f_r / scatterRecord.pdf / p_RR;
     }
     else
     {

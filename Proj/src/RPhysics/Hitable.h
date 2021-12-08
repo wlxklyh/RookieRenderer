@@ -23,10 +23,10 @@ namespace RPhysics {
 
     struct ScatterRecord {
         ScatterRecord(){
-            f_r = 1.0;
+            f_r = FColorRGB(1.0f,1.0f,1.0f);
             pdf = 1.0;
         }
-        float f_r;
+        FColorRGB f_r;
         float pdf;
         Ray scatterRay;
     };

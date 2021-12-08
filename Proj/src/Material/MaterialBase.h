@@ -24,7 +24,7 @@ float Schlick(float cosine, float refIdx);
 class MaterialBase {
 public:
     virtual bool Scatter(const RMath::Ray &rayIn, const RPhysics::HitRecord &rec,
-                         RMath::FVec3 &attenuation, RPhysics::ScatterRecord &scatterRecord) const {
+                         RPhysics::ScatterRecord &scatterRecord) const {
         return false;
     };
     virtual float ScatteringPdf(const Ray& r_in, const RPhysics::HitRecord& rec, const Ray& scattered) const {
