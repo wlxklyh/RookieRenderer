@@ -6,6 +6,7 @@
 #define ROOKIERENDERER_RPHYSICSFWD_H
 
 namespace RPhysics{
+    struct ScatterRecord;
     struct HitRecord;
     class Hitable;
     class HitTableList;

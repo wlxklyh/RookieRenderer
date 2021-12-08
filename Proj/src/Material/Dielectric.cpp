@@ -6,7 +6,7 @@
 #include "RPhysics.h"
 
 bool Dielectric::Scatter(const RMath::Ray &ray, const RPhysics::HitRecord &rec,
-                         RMath::FVec3 &attenuation, RMath::Ray &scattered) const {
+                         RMath::FVec3 &attenuation, RPhysics::ScatterRecord &scatterRecord) const {
     RMath::FVec3 outwardNormal;
     RMath::FVec3 reflected = Reflect(ray.Direction(), rec.normal);
     float ni_over_nt;
@@ -32,8 +32,8 @@ bool Dielectric::Scatter(const RMath::Ray &ray, const RPhysics::HitRecord &rec,
     else
         reflect_prob = 1.0;
     if (RandomDouble() < reflect_prob)
-        scattered = RMath::Ray(rec.p, reflected);
+        scatterRecord.scattered = RMath::Ray(rec.p, reflected);
     else
-        scattered = RMath::Ray(rec.p, refracted);
+        scatterRecord.scattered = RMath::Ray(rec.p, refracted);
     return true;
 }

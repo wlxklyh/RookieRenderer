@@ -16,7 +16,7 @@ public:
     Metal(const RMath::FColorRGB &a, float fuzz) : Albedo(a), Fuzz(fuzz) {};
 
     virtual bool Scatter(const RMath::Ray &rayIn, const RPhysics::HitRecord &rec,
-                         RMath::FVec3 &attenuation, RMath::Ray &scattered) const override;
+                         RMath::FVec3 &attenuation, RPhysics::ScatterRecord &scattered) const override;
 
 };
 

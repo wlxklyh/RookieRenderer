@@ -15,7 +15,7 @@ public:
     Dielectric(float ri) : RefIdx(ri) {}
 
     virtual bool Scatter(const RMath::Ray &ray, const RPhysics::HitRecord &rec,
-                         RMath::FVec3 &attenuation, RMath::Ray &scattered) const;
+                         RMath::FVec3 &attenuation,RPhysics::ScatterRecord &scatterRecord) const;
 
 };
 

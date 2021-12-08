@@ -8,13 +8,6 @@
 #include "RMath.h"
 #include "RPhysicsFwd.h"
 
-struct ScatterRecord
-{
-    Ray specular_ray;
-    bool is_specular;
-    FVec3 attenuation;
-//    Pdf *pdf_ptr;
-};
 
 RMath::FVec3 Reflect(const RMath::FVec3 &v, const RMath::FVec3 &n);
 
@@ -31,7 +24,7 @@ float Schlick(float cosine, float refIdx);
 class MaterialBase {
 public:
     virtual bool Scatter(const RMath::Ray &rayIn, const RPhysics::HitRecord &rec,
-                         RMath::FVec3 &attenuation, RMath::Ray &scattered) const {
+                         RMath::FVec3 &attenuation, RPhysics::ScatterRecord &scatterRecord) const {
         return false;
     };
     virtual float ScatteringPdf(const Ray& r_in, const RPhysics::HitRecord& rec, const Ray& scattered) const {

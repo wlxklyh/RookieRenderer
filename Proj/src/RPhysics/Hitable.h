@@ -21,6 +21,16 @@ namespace RPhysics {
         MaterialBase *mat;
     };
 
+    struct ScatterRecord {
+        ScatterRecord(){
+            f_r = 1.0;
+            pdf = 1.0;
+        }
+        float f_r;
+        float pdf;
+        Ray scattered;
+    };
+
     class Hitable {
     public:
         //这个碰撞体的碰撞函数
