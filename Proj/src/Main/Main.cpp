@@ -108,6 +108,7 @@ void RunConfig(const Config &config) {
     out << "P3\n" << PicW << " " << PicH << "\n255\n";
 
     Hitable *world = CornelBox();
+    PathIntegrator pathIntegrator;
     //（4）相机
     float aspect = float(PicH) / float(PicW);
     Camera *cam = new Camera(config.LookFrom, config.LookAt, FVec3(0, 1, 0),
@@ -194,8 +195,8 @@ int main() {
 //    RunConfig(Config("CornelBox",500,500,8,FVec3(278, 278, -800),FVec3(278,278,0)));
 //    RunConfig(Config("CornelBox",500,500,12,FVec3(278, 278, -800),FVec3(278,278,0)));
 //    RunConfig(Config("CornelBox",500,500,40,FVec3(278, 278, -800),FVec3(278,278,0)));
-//    RunConfig(Config("CornelBox",500,500,200,FVec3(278, 278, -800),FVec3(278,278,0)));
-    RunConfig(Config("CornelBox",500,500,1000,FVec3(278, 278, -800),FVec3(278,278,0)));
+    RunConfig(Config("CornelBox",500,500,200,FVec3(278, 278, -800),FVec3(278,278,0)));
+//    RunConfig(Config("CornelBox",500,500,1000,FVec3(278, 278, -800),FVec3(278,278,0)));
 //    RunConfig(Config("CornelBox",500,500,5000,FVec3(278, 278, -800),FVec3(278,278,0)));
 //    RunConfig(Config("CornelBox",500,500,25000,FVec3(278, 278, -800),FVec3(278,278,0)));
     return 0;
