@@ -8,6 +8,13 @@
 #include "RMath.h"
 #include "RPhysicsFwd.h"
 
+struct ScatterRecord
+{
+    Ray specular_ray;
+    bool is_specular;
+    FVec3 attenuation;
+//    Pdf *pdf_ptr;
+};
 
 RMath::FVec3 Reflect(const RMath::FVec3 &v, const RMath::FVec3 &n);
 
@@ -18,7 +25,7 @@ bool Refract(const RMath::FVec3 &v, const RMath::FVec3 &n, float ni_over_nt, RMa
 
 float Schlick(float cosine, float refIdx);
 
-RMath::FVec3 RandomInUnitSphere();
+
 
 
 class MaterialBase {

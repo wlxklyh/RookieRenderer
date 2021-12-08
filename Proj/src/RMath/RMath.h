@@ -10,5 +10,7 @@
 #include "Ray.h"
 #include "MathUtil.h"
 #include "Perlin.h"
+#include "Pdf.h"
+
 
 #endif //ROOKIERENDERER_RMATH_H

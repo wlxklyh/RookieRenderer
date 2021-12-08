@@ -7,7 +7,7 @@
 #include "Material.h"
 #include "Camera.h"
 #include "Config.h"
-
+#include "Path.h"
 using namespace RMath;
 using namespace RPhysics;
 
@@ -93,27 +93,6 @@ Hitable *CornelBox() {
     //return new HitTableList(list, i);
 }
 
-FColorRGB Color(const Ray &ray, Hitable &world, int depth) {
-    HitRecord hitRecord;
-    if (world.Hit(ray, 0.0001, MAXFLOAT, hitRecord)) {
-        Ray scattered;
-        FColorRGB attenuation;
-        FColorRGB emitted = hitRecord.mat->Emitted(ray, hitRecord, hitRecord.u, hitRecord.v, hitRecord.p);
-        if (depth < 50 && hitRecord.mat->Scatter(ray, hitRecord, attenuation, scattered)) {
-            FColorRGB retColor = Color(scattered, world, depth + 1);
-            return retColor * attenuation;
-        } else {
-            return emitted;
-        }
-    } else {
-//        FVec3 dir = ray.Direction();
-//        FVec3 unitDir = unit_vector(dir);
-//        float lerpValue = 0.5 * (unitDir.Y() + 1.0);
-//        return (1 - lerpValue) * FColorRGB(1.0, 1.0, 1.0) + lerpValue * FColorRGB(0.5, 0.7, 1.0);
-        //天空盒为黑色
-        return FColorRGB(0,0,0);
-    }
-}
 
 void RunConfig(const Config& config){
     int startTime = clock();
@@ -130,6 +109,7 @@ void RunConfig(const Config& config){
 
     Hitable *world = CornelBox();
     //（4）相机
+    PathIntegrator pathIntegrator;
     float aspect = float(PicH) / float(PicW);
     Camera *cam = new Camera(config.LookFrom, config.LookAt, FVec3(0,1,0),
                              config.VFov, aspect, config.Aperture, config.DistToFocus);
@@ -141,7 +121,7 @@ void RunConfig(const Config& config){
                 float u = float(x + drand48()) / float(PicW);
                 float v = float(y + drand48()) / float(PicH);
                 Ray ray = cam->GetRay(u, v);
-                FColorRGB col = Color(ray, *world, 0);
+                FColorRGB col = pathIntegrator.Li(ray, *world, 0);
                 color += col;
             }
             color = color / SamplesPerPixel;
@@ -211,14 +191,13 @@ int main() {
     // glass camera
     //RunConfig(Config("CornelBox",500,500,12,FVec3(0, 50, -400),FVec3(0,0,0)));
 
-
-    RunConfig(Config("CornelBox",500,500,1,FVec3(278, 278, -800),FVec3(278,278,0)));
-    RunConfig(Config("CornelBox",500,500,8,FVec3(278, 278, -800),FVec3(278,278,0)));
-    RunConfig(Config("CornelBox",500,500,12,FVec3(278, 278, -800),FVec3(278,278,0)));
-    RunConfig(Config("CornelBox",500,500,40,FVec3(278, 278, -800),FVec3(278,278,0)));
-    RunConfig(Config("CornelBox",500,500,200,FVec3(278, 278, -800),FVec3(278,278,0)));
+//    RunConfig(Config("CornelBox",500,500,1,FVec3(278, 278, -800),FVec3(278,278,0)));
+//    RunConfig(Config("CornelBox",500,500,8,FVec3(278, 278, -800),FVec3(278,278,0)));
+//    RunConfig(Config("CornelBox",500,500,12,FVec3(278, 278, -800),FVec3(278,278,0)));
+//    RunConfig(Config("CornelBox",500,500,40,FVec3(278, 278, -800),FVec3(278,278,0)));
+//    RunConfig(Config("CornelBox",500,500,200,FVec3(278, 278, -800),FVec3(278,278,0)));
     RunConfig(Config("CornelBox",500,500,1000,FVec3(278, 278, -800),FVec3(278,278,0)));
-    RunConfig(Config("CornelBox",500,500,5000,FVec3(278, 278, -800),FVec3(278,278,0)));
-    RunConfig(Config("CornelBox",500,500,25000,FVec3(278, 278, -800),FVec3(278,278,0)));
+//    RunConfig(Config("CornelBox",500,500,5000,FVec3(278, 278, -800),FVec3(278,278,0)));
+//    RunConfig(Config("CornelBox",500,500,25000,FVec3(278, 278, -800),FVec3(278,278,0)));
     return 0;
 }
