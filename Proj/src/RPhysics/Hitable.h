@@ -24,7 +24,7 @@ namespace RPhysics {
     struct ScatterRecord {
         ScatterRecord(){
             f_r = FColorRGB(1.0f,1.0f,1.0f);
-            pdf = 1.0;
+            pdf = 1.0 / 2 * M_PI;
         }
         FColorRGB f_r;
         float pdf;

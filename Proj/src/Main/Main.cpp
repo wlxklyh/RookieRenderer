@@ -86,7 +86,7 @@ Hitable *CornelBox() {
 
     MaterialBase *glass = new Dielectric(1.5);
     MaterialBase *mirr = new Metal(FVec3(0.7, 0.6, 0.5), 0.0);
-    list[i++] = new Sphere(FVec3(130, 90, 130), 90, glass);
+    list[i++] = new Sphere(FVec3(130, 90, 130), 90, mirr);
     list[i++] = new Sphere(FVec3(395, 90, 310), 90, mirr);
 
     return new BVHNode(list, i, 0.0, 1.0);
