@@ -14,7 +14,7 @@ FColorRGB PathIntegrator::Li(const Ray &ray, RPhysics::Hitable &world, int depth
         return FColorRGB(0,0,0);
     }
 
-    //(2)递归深度太深了 返回黑色 无效光线
+    //(2)递归深度太深了 这里做个保护 理论基本被RR了 返回黑色 无效光线
     if(depth > 50){
         return FColorRGB(0,0,0);
     }
