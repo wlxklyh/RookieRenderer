@@ -3,10 +3,11 @@
 <!-- TOC -->
 
 - [RookieRenderer](#rookierenderer)
-    - [Final Result](#final-result)
-    - [Build](#build)
-    - [Run](#run)
-    - [CornelBox](#cornelbox)
+  - [Final Result](#final-result)
+  - [Build](#build)
+  - [Run](#run)
+  - [CornelBox](#cornelbox)
+  - [Feature](#feature)
 
 <!-- /TOC -->
 
@@ -47,3 +48,9 @@ RunConfig(Config("CornelBox", 500, 500, 1, FVec3(278, 278, -800), FVec3(278, 278
 |Basic path tracing 1000spp|![](Img/BasicPpathTracing/CornelBox500x500x1000sppResultPic.jpg)|6.68965 minutes Width:500 Height:500 Samples:1000|
 |Basic path tracing 5000spp|![](Img/BasicPpathTracing/CornelBox500x500x5000sppResultPic.jpg)|32.4512 minutes Width:500 Height:500 Samples:5000|
 |Basic path tracing 25000spp|![](Img/BasicPpathTracing/CornelBox500x500x25000sppResultPic.jpg)|161.271 minutes Width:500 Height:500 Samples:25000|
+
+## Feature
+
+- MC PT
+- Multi Thread
+- gtest

@@ -8,6 +8,7 @@
 #include "Camera.h"
 #include "Config.h"
 #include "Path.h"
+#include "ParallelFor.h"
 using namespace RMath;
 using namespace RPhysics;
 
@@ -113,10 +114,17 @@ void RunConfig(const Config &config) {
     float aspect = float(PicH) / float(PicW);
     Camera *cam = new Camera(config.LookFrom, config.LookAt, FVec3(0, 1, 0),
                              config.VFov, aspect, config.Aperture, config.DistToFocus);
-    for (int y = PicH - 1; y >= 0; y--) {
+    std::vector<std::vector<FColorRGB>> framebuffer;
+    framebuffer.resize(PicH);
+    for (int i = 0; i < PicH; ++i) {
+        framebuffer[i].resize(PicW);
+    }
+    parallel_for_onelayer(0, PicH, 1, [&](int y) {
         for (int x = 0; x < PicW; x++) {
-
-            FColorRGB color(0, 0, 0);
+            FColorRGB &color = framebuffer[y][x];
+            color[0] = 0;
+            color[1] = 0;
+            color[2] = 0;
             for (int samplesIndex = 0; samplesIndex < SamplesPerPixel; ++samplesIndex) {
                 float u = float(x + drand48()) / float(PicW);
                 float v = float(y + drand48()) / float(PicH);
@@ -127,21 +135,32 @@ void RunConfig(const Config &config) {
             color = color / SamplesPerPixel;
             //gamma矫正
             color = FColorRGB(sqrt(color.R()), sqrt(color.G()), sqrt(color.B()));
+        }
+    });
+
+//    float costTime = (float) (clock() - startTime) / (float) CLOCKS_PER_SEC / 60.0f;
+//    float nowProgress = ((PicH - y) * 1.0f) / (PicH * 1.0f);
+//    std::cout << dec << "Progress:" << nowProgress * 100 << "% "
+//              << "Already cost:" << costTime << " minutes"
+//              << " Still need:" << costTime / nowProgress * (1 - nowProgress) << " minutes\n";
+
+    float costTime = (float) (clock() - startTime) / (float) CLOCKS_PER_SEC / 60.0f;
+    std::cout<< "Cost:" << costTime << " minutes\n";
+
+    for (int y = PicH - 1; y >= 0; y--) {
+        for (int x = 0; x < PicW; x++) {
+            FColorRGB &color = framebuffer[y][x];
+            //HDR部分直接裁掉
             int ir = int(255.99 * color[0]);
             int ig = int(255.99 * color[1]);
             int ib = int(255.99 * color[2]);
             ir = ir < 255 ? ir : 255;
             ig = ig < 255 ? ig : 255;
             ib = ib < 255 ? ib : 255;
-
             out << ir << " " << ig << " " << ib << "\n";
         }
-        float costTime = (float) (clock() - startTime) / (float) CLOCKS_PER_SEC / 60.0f;
-        float nowProgress = ((PicH - y) * 1.0f) / (PicH * 1.0f);
-        std::cout << dec << "Progress:" << nowProgress * 100 << "% "
-                  << "Already cost:" << costTime << " minutes"
-                  << " Still need:" << costTime / nowProgress * (1 - nowProgress) << " minutes\n";
     }
+
     std::ofstream outTime;
     outTime.open(config.GetLogFileName());
 
@@ -191,13 +210,13 @@ int main() {
     // glass camera
     //RunConfig(Config("CornelBox",500,500,12,FVec3(0, 50, -400),FVec3(0,0,0)));
 
-    RunConfig(Config("CornelBox",500,500,1,FVec3(278, 278, -800),FVec3(278,278,0)));
-    RunConfig(Config("CornelBox",500,500,8,FVec3(278, 278, -800),FVec3(278,278,0)));
-    RunConfig(Config("CornelBox",500,500,12,FVec3(278, 278, -800),FVec3(278,278,0)));
+//    RunConfig(Config("CornelBox",500,500,1,FVec3(278, 278, -800),FVec3(278,278,0)));
+//    RunConfig(Config("CornelBox",500,500,8,FVec3(278, 278, -800),FVec3(278,278,0)));
+//    RunConfig(Config("CornelBox",500,500,12,FVec3(278, 278, -800),FVec3(278,278,0)));
     RunConfig(Config("CornelBox",500,500,40,FVec3(278, 278, -800),FVec3(278,278,0)));
-    RunConfig(Config("CornelBox",500,500,200,FVec3(278, 278, -800),FVec3(278,278,0)));
-    RunConfig(Config("CornelBox",500,500,1000,FVec3(278, 278, -800),FVec3(278,278,0)));
-    RunConfig(Config("CornelBox",500,500,5000,FVec3(278, 278, -800),FVec3(278,278,0)));
-    RunConfig(Config("CornelBox",500,500,25000,FVec3(278, 278, -800),FVec3(278,278,0)));
+//    RunConfig(Config("CornelBox",500,500,200,FVec3(278, 278, -800),FVec3(278,278,0)));
+//    RunConfig(Config("CornelBox",500,500,1000,FVec3(278, 278, -800),FVec3(278,278,0)));
+//    RunConfig(Config("CornelBox",500,500,5000,FVec3(278, 278, -800),FVec3(278,278,0)));
+//    RunConfig(Config("CornelBox",500,500,25000,FVec3(278, 278, -800),FVec3(278,278,0)));
     return 0;
 }
